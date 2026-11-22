@@ -1,4 +1,5 @@
-import 'package:cupertino_ui/cupertino_ui.dart' show GlobalCupertinoLocalizations;
+import 'package:cupertino_ui/cupertino_ui.dart'
+    show GlobalCupertinoLocalizations;
 import 'package:flutter_localizations/flutter_localizations.dart'
     show GlobalWidgetsLocalizations;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -123,12 +124,14 @@ class InMemoryHistoryStore implements HistoryStore {
   @override
   List<CalculationRecord> search(String query, {bool favoritesOnly = false}) {
     final normalized = query.trim().toLowerCase();
-    return all().where((record) {
-      if (favoritesOnly && !record.favorite) return false;
-      if (normalized.isEmpty) return true;
-      return record.expression.toLowerCase().contains(normalized) ||
-          record.result.toLowerCase().contains(normalized);
-    }).toList(growable: false);
+    return all()
+        .where((record) {
+          if (favoritesOnly && !record.favorite) return false;
+          if (normalized.isEmpty) return true;
+          return record.expression.toLowerCase().contains(normalized) ||
+              record.result.toLowerCase().contains(normalized);
+        })
+        .toList(growable: false);
   }
 
   @override
@@ -204,11 +207,11 @@ class TestEnvironment {
   final ProviderContainer container;
 
   List<Override> get overrides => [
-        sharedPreferencesProvider.overrideWithValue(preferences),
-        historyRepositoryProvider.overrideWithValue(history),
-        speechRecognizerProvider.overrideWithValue(recognizer),
-        speechSynthesizerProvider.overrideWithValue(synthesizer),
-      ];
+    sharedPreferencesProvider.overrideWithValue(preferences),
+    historyRepositoryProvider.overrideWithValue(history),
+    speechRecognizerProvider.overrideWithValue(recognizer),
+    speechSynthesizerProvider.overrideWithValue(synthesizer),
+  ];
 
   static Future<TestEnvironment> create({
     Map<String, Object> preferences = const {},
@@ -225,7 +228,13 @@ class TestEnvironment {
       speechSynthesizerProvider.overrideWithValue(synthesizer),
     ];
     final container = ProviderContainer(overrides: overrides);
-    return TestEnvironment._(prefs, history, recognizer, synthesizer, container);
+    return TestEnvironment._(
+      prefs,
+      history,
+      recognizer,
+      synthesizer,
+      container,
+    );
   }
 
   Future<void> dispose() async {

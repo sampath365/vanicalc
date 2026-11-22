@@ -74,7 +74,9 @@ class _VoiceCalculatorScreenState extends ConsumerState<VoiceCalculatorScreen>
       }
     });
 
-    final errorText = state.errorCode == null ? null : context.tr(state.errorCode!);
+    final errorText = state.errorCode == null
+        ? null
+        : context.tr(state.errorCode!);
     final noticeText = state.notice == null ? null : context.tr(state.notice!);
 
     return Scaffold(
@@ -135,8 +137,9 @@ class _VoiceCalculatorScreenState extends ConsumerState<VoiceCalculatorScreen>
                 switch (state.status) {
                   VoiceStatus.listening => context.tr('voice_listening'),
                   VoiceStatus.processing => context.tr('voice_processing'),
-                  VoiceStatus.needsConfirmation =>
-                    context.tr('voice_confirm_title'),
+                  VoiceStatus.needsConfirmation => context.tr(
+                    'voice_confirm_title',
+                  ),
                   VoiceStatus.result => context.tr('voice_recognized'),
                   VoiceStatus.error => context.tr('voice_no_speech'),
                   VoiceStatus.idle => context.tr('voice_tap_to_speak'),
@@ -209,8 +212,9 @@ class _VoiceCalculatorScreenState extends ConsumerState<VoiceCalculatorScreen>
                     decoration: InputDecoration(
                       hintText: context.tr('voice_edit_hint'),
                     ),
-                    onChanged: (value) =>
-                        ref.read(voiceControllerProvider.notifier).editExpression(value),
+                    onChanged: (value) => ref
+                        .read(voiceControllerProvider.notifier)
+                        .editExpression(value),
                   ),
                   const SizedBox(height: 6),
                   Text(
@@ -228,8 +232,8 @@ class _VoiceCalculatorScreenState extends ConsumerState<VoiceCalculatorScreen>
                           onPressed: state.expression.trim().isEmpty
                               ? null
                               : () => ref
-                                  .read(voiceControllerProvider.notifier)
-                                  .calculate(),
+                                    .read(voiceControllerProvider.notifier)
+                                    .calculate(),
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -351,11 +355,12 @@ class _MicOrb extends StatelessWidget {
           return Stack(
             alignment: Alignment.center,
             children: [
+              if (listening) _ring(1 + value * 0.55, (1 - value) * 0.35),
               if (listening)
-                _ring(1 + value * 0.55, (1 - value) * 0.35),
-              if (listening)
-                _ring(1 + ((value + 0.5) % 1) * 0.55,
-                    (1 - ((value + 0.5) % 1)) * 0.3),
+                _ring(
+                  1 + ((value + 0.5) % 1) * 0.55,
+                  (1 - ((value + 0.5) % 1)) * 0.3,
+                ),
               PressableScale(
                 key: const Key('voice_mic_button'),
                 onTap: onTap,
@@ -381,7 +386,9 @@ class _MicOrb extends StatelessWidget {
                   child: Icon(
                     listening
                         ? Icons.stop_rounded
-                        : (speaking ? Icons.volume_up_rounded : Icons.mic_rounded),
+                        : (speaking
+                              ? Icons.volume_up_rounded
+                              : Icons.mic_rounded),
                     color: Colors.white,
                     size: 46,
                   ),
@@ -440,15 +447,14 @@ class _ResultCard extends ConsumerWidget {
                 )
               else
                 IconButton(
-                  onPressed: () => controller.speakCalculation(answerOnly: true),
+                  onPressed: () =>
+                      controller.speakCalculation(answerOnly: true),
                   icon: const Icon(Icons.volume_up_rounded),
                   tooltip: context.tr('voice_speak_answer'),
                 ),
               IconButton(
                 onPressed: () async {
-                  await ref
-                      .read(platformServicesProvider)
-                      .copy(state.result);
+                  await ref.read(platformServicesProvider).copy(state.result);
                   if (!context.mounted) return;
                   showAppSnack(context, context.tr('copied'));
                 },
@@ -463,16 +469,14 @@ class _ResultCard extends ConsumerWidget {
             style: theme.textTheme.displayMedium,
           ),
           const SizedBox(height: 4),
-          Text(
-            state.expression,
-            style: theme.textTheme.bodySmall,
-          ),
+          Text(state.expression, style: theme.textTheme.bodySmall),
           const SizedBox(height: 14),
           Row(
             children: [
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () => controller.speakCalculation(answerOnly: true),
+                  onPressed: () =>
+                      controller.speakCalculation(answerOnly: true),
                   icon: const Icon(Icons.record_voice_over_rounded, size: 18),
                   label: Text(context.tr('voice_speak_answer')),
                 ),
@@ -494,11 +498,7 @@ class _ResultCard extends ConsumerWidget {
 }
 
 class _Banner extends StatelessWidget {
-  const _Banner({
-    required this.icon,
-    required this.color,
-    required this.text,
-  });
+  const _Banner({required this.icon, required this.color, required this.text});
 
   final IconData icon;
   final Color color;
@@ -519,10 +519,8 @@ class _Banner extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: color,
-                    fontWeight: FontWeight.w600,
-                  ),
+              style: Theme.of(context).textTheme.bodySmall
+                  ?.copyWith(color: color, fontWeight: FontWeight.w600),
             ),
           ),
         ],

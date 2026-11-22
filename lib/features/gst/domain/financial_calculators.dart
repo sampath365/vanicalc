@@ -126,8 +126,7 @@ class FinancialCalculators {
     required double principal,
     required double annualRate,
     required double years,
-  }) =>
-      principal * annualRate * years / 100;
+  }) => principal * annualRate * years / 100;
 
   static double compoundInterest({
     required double principal,
@@ -136,13 +135,17 @@ class FinancialCalculators {
     int compoundsPerYear = 1,
   }) {
     if (principal == 0) return 0;
-    final amount = principal *
-        math.pow(1 + annualRate / (100 * compoundsPerYear),
-            compoundsPerYear * years);
+    final amount =
+        principal *
+        math.pow(
+          1 + annualRate / (100 * compoundsPerYear),
+          compoundsPerYear * years,
+        );
     return amount - principal;
   }
 
-  static double percentOf(double percent, double value) => value * percent / 100;
+  static double percentOf(double percent, double value) =>
+      value * percent / 100;
 
   static double whatPercent(double part, double whole) =>
       whole == 0 ? 0 : part / whole * 100;

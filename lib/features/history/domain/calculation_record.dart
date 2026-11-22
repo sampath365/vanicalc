@@ -34,15 +34,15 @@ class CalculationRecord {
   }
 
   Map<String, dynamic> toMap() => {
-        'id': id,
-        'expression': expression,
-        'result': result,
-        'value': value,
-        'type': type,
-        'languageCode': languageCode,
-        'createdAt': createdAt.millisecondsSinceEpoch,
-        'favorite': favorite,
-      };
+    'id': id,
+    'expression': expression,
+    'result': result,
+    'value': value,
+    'type': type,
+    'languageCode': languageCode,
+    'createdAt': createdAt.millisecondsSinceEpoch,
+    'favorite': favorite,
+  };
 
   static CalculationRecord? fromMap(Map<dynamic, dynamic> map) {
     final id = map['id'];

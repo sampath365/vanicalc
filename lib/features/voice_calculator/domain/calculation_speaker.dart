@@ -6,9 +6,7 @@ import '../../number_to_words/domain/number_to_words_engine.dart';
 /// Builds natural-language sentences for a calculation so text-to-speech can
 /// read numbers in the selected language.
 class CalculationSpeaker {
-  const CalculationSpeaker({
-    this.numberEngine = const NumberToWordsEngine(),
-  });
+  const CalculationSpeaker({this.numberEngine = const NumberToWordsEngine()});
 
   final NumberToWordsEngine numberEngine;
 
@@ -31,7 +29,8 @@ class CalculationSpeaker {
     AppLanguage language, {
     NumberSystem system = NumberSystem.indian,
   }) {
-    final vocabulary = _speakVocabulary[language.code] ?? _speakVocabulary['en']!;
+    final vocabulary =
+        _speakVocabulary[language.code] ?? _speakVocabulary['en']!;
     final tokens = RegExp(r'\d+\.?\d*|sqrt|pi|e|mod|[+\-*/^%!()]')
         .allMatches(expression)
         .map((match) => match.group(0)!)
@@ -88,7 +87,8 @@ class CalculationSpeaker {
     AppLanguage language, {
     NumberSystem system = NumberSystem.indian,
   }) {
-    final vocabulary = _speakVocabulary[language.code] ?? _speakVocabulary['en']!;
+    final vocabulary =
+        _speakVocabulary[language.code] ?? _speakVocabulary['en']!;
     final left = expressionWords(expression, language, system: system);
     final right = resultWords(value, language, system: system);
     return '$left ${vocabulary.equals} $right';

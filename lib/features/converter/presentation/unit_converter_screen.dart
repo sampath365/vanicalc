@@ -36,7 +36,9 @@ class _UnitConverterScreenState extends ConsumerState<UnitConverterScreen> {
     setState(() {
       _categoryIndex = index;
       _from = _category.units.first;
-      _to = _category.units.length > 1 ? _category.units[1] : _category.units.first;
+      _to = _category.units.length > 1
+          ? _category.units[1]
+          : _category.units.first;
     });
   }
 
@@ -58,14 +60,18 @@ class _UnitConverterScreenState extends ConsumerState<UnitConverterScreen> {
     final theme = Theme.of(context);
     final settings = ref.watch(settingsControllerProvider);
     final converted = _converted;
-    final formatted = converted == null ? '' : ResultFormatter.format(converted);
+    final formatted = converted == null
+        ? ''
+        : ResultFormatter.format(converted);
     final words = converted == null
         ? ''
-        : ref.read(numberToWordsEngineProvider).fromString(
-              formatted,
-              languageCode: settings.language.code,
-              system: settings.numberSystem,
-            );
+        : ref
+              .read(numberToWordsEngineProvider)
+              .fromString(
+                formatted,
+                languageCode: settings.language.code,
+                system: settings.numberSystem,
+              );
 
     return Scaffold(
       appBar: AppBar(title: Text(context.tr('converter_title'))),
@@ -163,9 +169,7 @@ class _UnitConverterScreenState extends ConsumerState<UnitConverterScreen> {
                     fit: BoxFit.scaleDown,
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      converted == null
-                          ? '—'
-                          : '$formatted ${_to.symbol}',
+                      converted == null ? '—' : '$formatted ${_to.symbol}',
                       style: theme.textTheme.displayMedium?.copyWith(
                         color: theme.colorScheme.primary,
                       ),
@@ -239,7 +243,9 @@ class _UnitConverterScreenState extends ConsumerState<UnitConverterScreen> {
               onPressed: converted == null
                   ? null
                   : () async {
-                      await ref.read(historyControllerProvider.notifier).add(
+                      await ref
+                          .read(historyControllerProvider.notifier)
+                          .add(
                             expression:
                                 '${_value.text} ${_from.symbol} → ${_to.symbol}',
                             result: '$formatted ${_to.symbol}',

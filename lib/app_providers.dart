@@ -40,8 +40,8 @@ final historyRepositoryProvider = Provider<HistoryStore>(
 
 final historyControllerProvider =
     NotifierProvider<HistoryController, List<CalculationRecord>>(
-  HistoryController.new,
-);
+      HistoryController.new,
+    );
 
 final expressionEngineProvider = Provider<ExpressionEngine>(
   (ref) => const ExpressionEngine(),
@@ -59,9 +59,8 @@ final spokenMathParserProvider = Provider<SpokenMathParser>(
 );
 
 final calculationSpeakerProvider = Provider<CalculationSpeaker>(
-  (ref) => CalculationSpeaker(
-    numberEngine: ref.watch(numberToWordsEngineProvider),
-  ),
+  (ref) =>
+      CalculationSpeaker(numberEngine: ref.watch(numberToWordsEngineProvider)),
 );
 
 final speechRecognizerProvider = Provider<SpeechRecognizer>(

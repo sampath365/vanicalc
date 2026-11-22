@@ -113,8 +113,7 @@ const Map<String, String> mrStrings = <String, String>{
   'language_title': 'भाषा',
   'language_subtitle': 'ॲप, व्हॉइस इनपुट आणि वाक्साठी भाषा निवडा',
   'language_selected': 'निवडले',
-  'language_note':
-      'प्रत्येक भाषेत संख्या शब्द आणि वाक् ऑफलाइन काम करतात. काही साधन लेबल इंग्रजीत राहतील.',
+  'language_note': 'प्रत्येक भाषेत संख्या शब्द आणि वाक् ऑफलाइन काम करतात. काही साधन लेबल इंग्रजीत राहतील.',
 
   'history_title': 'इतिहास',
   'history_search_hint': 'पदावली किंवा निकाल शोधा',

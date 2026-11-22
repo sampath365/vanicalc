@@ -56,10 +56,7 @@ void main() {
         .read(voiceControllerProvider.notifier)
         .process('10 plus 5');
     expect(environment.synthesizer.spoken, isEmpty);
-    expect(
-      environment.container.read(voiceControllerProvider).result,
-      '15',
-    );
+    expect(environment.container.read(voiceControllerProvider).result, '15');
   });
 
   test('asks for confirmation when no operator was heard', () async {
@@ -125,10 +122,7 @@ void main() {
       container.read(settingsControllerProvider).language,
       AppLanguage.telugu,
     );
-    expect(
-      environment.preferences.getString('settings.language'),
-      'te',
-    );
+    expect(environment.preferences.getString('settings.language'), 'te');
   });
 
   test('reads the result in a requested language', () async {
@@ -167,10 +161,7 @@ void main() {
     await container
         .read(voiceControllerProvider.notifier)
         .process('show history');
-    expect(
-      container.read(voiceControllerProvider).navigateTo,
-      '/history',
-    );
+    expect(container.read(voiceControllerProvider).navigateTo, '/history');
     container.read(voiceControllerProvider.notifier).consumeNavigation();
     expect(container.read(voiceControllerProvider).navigateTo, isNull);
   });
@@ -179,9 +170,9 @@ void main() {
     final environment = await TestEnvironment.create();
     addTearDown(environment.dispose);
     final container = environment.container;
-    await container.read(settingsControllerProvider.notifier).setLanguage(
-          AppLanguage.telugu,
-        );
+    await container
+        .read(settingsControllerProvider.notifier)
+        .setLanguage(AppLanguage.telugu);
     await container.read(voiceControllerProvider.notifier).startListening();
 
     expect(environment.recognizer.lastLocale, 'te_IN');
@@ -216,9 +207,9 @@ void main() {
     addTearDown(environment.dispose);
     environment.recognizer.locales;
     final container = environment.container;
-    await container.read(settingsControllerProvider.notifier).setLanguage(
-          AppLanguage.punjabi,
-        );
+    await container
+        .read(settingsControllerProvider.notifier)
+        .setLanguage(AppLanguage.punjabi);
     await container.read(voiceControllerProvider.notifier).startListening();
 
     expect(environment.recognizer.lastLocale, 'en_US');

@@ -53,12 +53,14 @@ class _GstCalculatorScreenState extends ConsumerState<GstCalculatorScreen> {
     final result = _result;
     final words = result == null
         ? ''
-        : ref.read(numberToWordsEngineProvider).fromString(
-              ResultFormatter.format(result.totalAmount),
-              languageCode: settings.language.code,
-              system: settings.numberSystem,
-              currency: true,
-            );
+        : ref
+              .read(numberToWordsEngineProvider)
+              .fromString(
+                ResultFormatter.format(result.totalAmount),
+                languageCode: settings.language.code,
+                system: settings.numberSystem,
+                currency: true,
+              );
 
     return Scaffold(
       appBar: AppBar(
@@ -97,7 +99,9 @@ class _GstCalculatorScreenState extends ConsumerState<GstCalculatorScreen> {
             const SizedBox(height: 16),
             TextField(
               controller: _amount,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
               onChanged: (_) => setState(() {}),
               decoration: InputDecoration(
                 labelText: context.tr('gst_amount'),
@@ -135,8 +139,9 @@ class _GstCalculatorScreenState extends ConsumerState<GstCalculatorScreen> {
                   width: 110,
                   child: TextField(
                     controller: _customRate,
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
+                    keyboardType: const TextInputType.numberWithOptions(
+                      decimal: true,
+                    ),
                     decoration: InputDecoration(
                       hintText: context.tr('gst_custom'),
                       isDense: true,
@@ -260,7 +265,10 @@ class _GstCalculatorScreenState extends ConsumerState<GstCalculatorScreen> {
                       ],
                     ),
                     const SizedBox(height: 6),
-                    Text(words, style: theme.textTheme.bodyLarge?.copyWith(height: 1.5)),
+                    Text(
+                      words,
+                      style: theme.textTheme.bodyLarge?.copyWith(height: 1.5),
+                    ),
                   ],
                 ),
               ),
@@ -269,10 +277,13 @@ class _GstCalculatorScreenState extends ConsumerState<GstCalculatorScreen> {
                 label: context.tr('save'),
                 icon: Icons.bookmark_add_rounded,
                 onPressed: () async {
-                  await ref.read(historyControllerProvider.notifier).add(
+                  await ref
+                      .read(historyControllerProvider.notifier)
+                      .add(
                         expression:
                             'GST ${_addGst ? '+' : '-'}${_rate.toInt()}% on ₹${ResultFormatter.grouped(result.baseAmount, system: settings.numberSystem)}',
-                        result: '₹${ResultFormatter.grouped(result.totalAmount, system: settings.numberSystem)}',
+                        result:
+                            '₹${ResultFormatter.grouped(result.totalAmount, system: settings.numberSystem)}',
                         value: result.totalAmount,
                         type: CalculationType.gst,
                         languageCode: settings.language.code,
@@ -317,13 +328,14 @@ class _ResultRow extends StatelessWidget {
         ),
         Text(
           '₹ ${ResultFormatter.grouped(value, system: system)}',
-          style: (emphasized
-                  ? theme.textTheme.titleLarge
-                  : theme.textTheme.titleMedium)
-              ?.copyWith(
-            color: emphasized ? theme.colorScheme.primary : null,
-            fontWeight: FontWeight.w700,
-          ),
+          style:
+              (emphasized
+                      ? theme.textTheme.titleLarge
+                      : theme.textTheme.titleMedium)
+                  ?.copyWith(
+                    color: emphasized ? theme.colorScheme.primary : null,
+                    fontWeight: FontWeight.w700,
+                  ),
         ),
       ],
     );

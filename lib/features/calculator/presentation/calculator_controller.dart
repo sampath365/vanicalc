@@ -150,7 +150,8 @@ class CalculatorController extends Notifier<CalculatorState> {
 
   void _appendToken(String token) {
     if (state.evaluated) {
-      final continues = _operators.contains(token) ||
+      final continues =
+          _operators.contains(token) ||
           token == ')' ||
           token == '!' ||
           token == '%' ||
@@ -180,7 +181,8 @@ class CalculatorController extends Notifier<CalculatorState> {
   String _smartAppend(String expression, String token) {
     final last = expression.isEmpty ? '' : expression[expression.length - 1];
     final endsWithOperator = _operators.contains(last);
-    final endsWithValue = last.isNotEmpty &&
+    final endsWithValue =
+        last.isNotEmpty &&
         (RegExp(r'[0-9)!%]').hasMatch(last) ||
             expression.endsWith('pi') ||
             expression.endsWith('e'));
@@ -195,7 +197,10 @@ class CalculatorController extends Notifier<CalculatorState> {
     }
 
     if (RegExp(r'^\d$').hasMatch(token)) {
-      if (last == ')' || last == '!' || last == '%' || expression.endsWith('pi')) {
+      if (last == ')' ||
+          last == '!' ||
+          last == '%' ||
+          expression.endsWith('pi')) {
         return '$expression*$token';
       }
       return '$expression$token';
@@ -274,7 +279,9 @@ class CalculatorController extends Notifier<CalculatorState> {
     final start = match.start;
     final before = start == 0 ? '' : expression[start - 1];
     if (before == '-' &&
-        (start - 1 == 0 || _operators.contains(expression[start - 2]) || expression[start - 2] == '(')) {
+        (start - 1 == 0 ||
+            _operators.contains(expression[start - 2]) ||
+            expression[start - 2] == '(')) {
       final next = expression.replaceRange(start - 1, start, '');
       state = state.copyWith(expression: next);
     } else {
@@ -349,7 +356,9 @@ class CalculatorController extends Notifier<CalculatorState> {
 
   void _saveHistory(EvaluationResult outcome) {
     final settings = ref.read(settingsControllerProvider);
-    ref.read(historyControllerProvider.notifier).add(
+    ref
+        .read(historyControllerProvider.notifier)
+        .add(
           expression: state.expression,
           result: outcome.display,
           value: outcome.value,
@@ -378,5 +387,5 @@ class CalculatorController extends Notifier<CalculatorState> {
 
 final calculatorControllerProvider =
     NotifierProvider<CalculatorController, CalculatorState>(
-  CalculatorController.new,
-);
+      CalculatorController.new,
+    );

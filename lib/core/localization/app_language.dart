@@ -116,8 +116,7 @@ enum AppLanguage {
   }
 
   /// Resolves a device locale (e.g. `te_IN`) to a supported language.
-  static AppLanguage fromLocale(Locale locale) =>
-      fromCode(locale.languageCode);
+  static AppLanguage fromLocale(Locale locale) => fromCode(locale.languageCode);
 
   static const List<AppLanguage> indianLanguages = [
     AppLanguage.telugu,

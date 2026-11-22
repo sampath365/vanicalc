@@ -23,9 +23,9 @@ void main() {
     return widget.data ?? '';
   }
 
-  testWidgets('microphone starts listening and the result is spoken',
-      (tester) async {
-
+  testWidgets('microphone starts listening and the result is spoken', (
+    tester,
+  ) async {
     await tester.binding.setSurfaceSize(const Size(800, 1600));
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
@@ -55,9 +55,7 @@ void main() {
     expect(environment.synthesizer.spoken.last, contains('Sixty'));
   });
 
-  testWidgets('example chips calculate without the microphone',
-      (tester) async {
-
+  testWidgets('example chips calculate without the microphone', (tester) async {
     await tester.binding.setSurfaceSize(const Size(800, 1600));
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
@@ -84,7 +82,6 @@ void main() {
   });
 
   testWidgets('shows an error for unclear speech', (tester) async {
-
     await tester.binding.setSurfaceSize(const Size(800, 1600));
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
@@ -107,7 +104,6 @@ void main() {
   });
 
   testWidgets('renders in Hindi', (tester) async {
-
     await tester.binding.setSurfaceSize(const Size(800, 1600));
     addTearDown(() => tester.binding.setSurfaceSize(null));
 

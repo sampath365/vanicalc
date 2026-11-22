@@ -15,7 +15,9 @@ String _money(BuildContext context, WidgetRef ref, double value) {
 
 String _words(BuildContext context, WidgetRef ref, double value) {
   final settings = ref.read(settingsControllerProvider);
-  return ref.read(numberToWordsEngineProvider).fromString(
+  return ref
+      .read(numberToWordsEngineProvider)
+      .fromString(
         ResultFormatter.format(value),
         languageCode: settings.language.code,
         system: settings.numberSystem,
@@ -24,9 +26,9 @@ String _words(BuildContext context, WidgetRef ref, double value) {
 }
 
 Widget _invalid(BuildContext context) => Text(
-      context.tr('invalid_input'),
-      style: TextStyle(color: Theme.of(context).colorScheme.error),
-    );
+  context.tr('invalid_input'),
+  style: TextStyle(color: Theme.of(context).colorScheme.error),
+);
 
 /// Discount calculator.
 class DiscountScreen extends ConsumerStatefulWidget {
@@ -52,7 +54,11 @@ class _DiscountScreenState extends ConsumerState<DiscountScreen> {
     final price = double.tryParse(_price.text.trim());
     final percent = double.tryParse(_percent.text.trim());
     final invalid =
-        price == null || percent == null || price < 0 || percent < 0 || percent > 100;
+        price == null ||
+        percent == null ||
+        price < 0 ||
+        percent < 0 ||
+        percent > 100;
 
     return ToolPage(
       title: context.tr('tool_discount'),
@@ -76,10 +82,7 @@ class _DiscountScreenState extends ConsumerState<DiscountScreen> {
           onChanged: (_) => setState(() {}),
         ),
         const SizedBox(height: 4),
-        if (invalid)
-          _invalid(context)
-        else
-          _result(context, price, percent),
+        if (invalid) _invalid(context) else _result(context, price, percent),
       ],
     );
   }
@@ -156,10 +159,7 @@ class _ProfitLossScreenState extends ConsumerState<ProfitLossScreen> {
           onChanged: (_) => setState(() {}),
         ),
         const SizedBox(height: 4),
-        if (invalid)
-          _invalid(context)
-        else
-          _result(context, cost, selling),
+        if (invalid) _invalid(context) else _result(context, cost, selling),
       ],
     );
   }
@@ -192,7 +192,8 @@ class _ProfitLossScreenState extends ConsumerState<ProfitLossScreen> {
         context,
         ref,
         expression: '${_cost.text} → ${_selling.text}',
-        result: '${isProfit ? '+' : '-'}${_money(context, ref, difference.abs())}',
+        result:
+            '${isProfit ? '+' : '-'}${_money(context, ref, difference.abs())}',
         value: difference,
       ),
     );
@@ -208,7 +209,9 @@ class EmiScreen extends ConsumerStatefulWidget {
 }
 
 class _EmiScreenState extends ConsumerState<EmiScreen> {
-  final TextEditingController _principal = TextEditingController(text: '500000');
+  final TextEditingController _principal = TextEditingController(
+    text: '500000',
+  );
   final TextEditingController _rate = TextEditingController(text: '9.5');
   final TextEditingController _months = TextEditingController(text: '60');
 
@@ -226,7 +229,11 @@ class _EmiScreenState extends ConsumerState<EmiScreen> {
     final rate = double.tryParse(_rate.text.trim());
     final months = int.tryParse(_months.text.trim());
     final invalid =
-        principal == null || rate == null || months == null || principal <= 0 || months <= 0;
+        principal == null ||
+        rate == null ||
+        months == null ||
+        principal <= 0 ||
+        months <= 0;
 
     return ToolPage(
       title: context.tr('tool_emi'),
@@ -301,7 +308,8 @@ class _EmiScreenState extends ConsumerState<EmiScreen> {
       onSave: () => saveToolHistory(
         context,
         ref,
-        expression: 'EMI ₹${_principal.text} @ ${_rate.text}% × ${_months.text}m',
+        expression:
+            'EMI ₹${_principal.text} @ ${_rate.text}% × ${_months.text}m',
         result: _money(context, ref, result.monthlyEmi),
         value: result.monthlyEmi,
       ),
@@ -318,7 +326,9 @@ class InterestScreen extends ConsumerStatefulWidget {
 }
 
 class _InterestScreenState extends ConsumerState<InterestScreen> {
-  final TextEditingController _principal = TextEditingController(text: '100000');
+  final TextEditingController _principal = TextEditingController(
+    text: '100000',
+  );
   final TextEditingController _rate = TextEditingController(text: '8');
   final TextEditingController _years = TextEditingController(text: '5');
   bool _compound = false;
@@ -336,7 +346,8 @@ class _InterestScreenState extends ConsumerState<InterestScreen> {
     final principal = double.tryParse(_principal.text.trim());
     final rate = double.tryParse(_rate.text.trim());
     final years = double.tryParse(_years.text.trim());
-    final invalid = principal == null || rate == null || years == null || principal < 0;
+    final invalid =
+        principal == null || rate == null || years == null || principal < 0;
 
     return ToolPage(
       title: context.tr('tool_simple_interest'),
@@ -451,7 +462,8 @@ class _TipScreenState extends ConsumerState<TipScreen> {
     final bill = double.tryParse(_bill.text.trim());
     final percent = double.tryParse(_percent.text.trim());
     final people = int.tryParse(_people.text.trim());
-    final invalid = bill == null ||
+    final invalid =
+        bill == null ||
         percent == null ||
         people == null ||
         bill < 0 ||
@@ -487,7 +499,12 @@ class _TipScreenState extends ConsumerState<TipScreen> {
     );
   }
 
-  Widget _result(BuildContext context, double bill, double percent, int people) {
+  Widget _result(
+    BuildContext context,
+    double bill,
+    double percent,
+    int people,
+  ) {
     final tip = FinancialCalculators.tipAmount(bill, percent);
     final total = bill + tip;
     final perPerson = FinancialCalculators.perPerson(total, people);

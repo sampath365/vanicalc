@@ -59,35 +59,11 @@ class CalculatorKeypad extends StatelessWidget {
       CalcKeySpec(')'),
       CalcKeySpec('back'),
     ],
-    [
-      CalcKeySpec('7'),
-      CalcKeySpec('8'),
-      CalcKeySpec('9'),
-      CalcKeySpec('/'),
-    ],
-    [
-      CalcKeySpec('4'),
-      CalcKeySpec('5'),
-      CalcKeySpec('6'),
-      CalcKeySpec('*'),
-    ],
-    [
-      CalcKeySpec('1'),
-      CalcKeySpec('2'),
-      CalcKeySpec('3'),
-      CalcKeySpec('-'),
-    ],
-    [
-      CalcKeySpec('+/-'),
-      CalcKeySpec('0'),
-      CalcKeySpec('.'),
-      CalcKeySpec('+'),
-    ],
-    [
-      CalcKeySpec('%'),
-      CalcKeySpec('mod'),
-      CalcKeySpec('=', flex: 2),
-    ],
+    [CalcKeySpec('7'), CalcKeySpec('8'), CalcKeySpec('9'), CalcKeySpec('/')],
+    [CalcKeySpec('4'), CalcKeySpec('5'), CalcKeySpec('6'), CalcKeySpec('*')],
+    [CalcKeySpec('1'), CalcKeySpec('2'), CalcKeySpec('3'), CalcKeySpec('-')],
+    [CalcKeySpec('+/-'), CalcKeySpec('0'), CalcKeySpec('.'), CalcKeySpec('+')],
+    [CalcKeySpec('%'), CalcKeySpec('mod'), CalcKeySpec('=', flex: 2)],
   ];
 
   static const List<List<CalcKeySpec>> scientificRows = [
@@ -161,7 +137,10 @@ class CalculatorKeypad extends StatelessWidget {
                 for (final key in row)
                   Expanded(
                     flex: key.flex,
-                    child: CalcKeyButton(spec: key, onTap: () => onKey(key.value)),
+                    child: CalcKeyButton(
+                      spec: key,
+                      onTap: () => onKey(key.value),
+                    ),
                   ),
               ],
             ),
@@ -340,7 +319,10 @@ class MemoryBar extends StatelessWidget {
                   ? () => onKey(key)
                   : null,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 5,
+                ),
                 decoration: BoxDecoration(
                   color: theme.colorScheme.primary.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(10),

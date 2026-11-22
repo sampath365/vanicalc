@@ -9,7 +9,8 @@ class AppException implements Exception {
   final String? detail;
 
   @override
-  String toString() => 'AppException($code${detail == null ? '' : ': $detail'})';
+  String toString() =>
+      'AppException($code${detail == null ? '' : ': $detail'})';
 }
 
 class SpeechException extends AppException {

@@ -7,12 +7,16 @@ void main() {
   const parser = SpokenMathParser();
   const engine = ExpressionEngine();
 
-  SpokenParseResult parse(String text, {AppLanguage language = AppLanguage.english}) =>
-      parser.parse(text, language);
+  SpokenParseResult parse(
+    String text, {
+    AppLanguage language = AppLanguage.english,
+  }) => parser.parse(text, language);
 
   double? value(String text, {AppLanguage language = AppLanguage.english}) {
     final result = parse(text, language: language);
-    return result.expression.isEmpty ? null : engine.tryEvaluate(result.expression);
+    return result.expression.isEmpty
+        ? null
+        : engine.tryEvaluate(result.expression);
   }
 
   group('English phrases', () {
@@ -71,7 +75,9 @@ void main() {
 
     test('spoken lakh and crore', () {
       expect(
-        value('sixteen lakh thirty four thousand three hundred ninety one plus nine'),
+        value(
+          'sixteen lakh thirty four thousand three hundred ninety one plus nine',
+        ),
         1634400,
       );
     });
@@ -130,10 +136,7 @@ void main() {
     });
 
     test('English digits work with an Indian language selected', () {
-      expect(
-        value('25 plus 35', language: AppLanguage.telugu),
-        60,
-      );
+      expect(value('25 plus 35', language: AppLanguage.telugu), 60);
     });
   });
 
@@ -159,10 +162,7 @@ void main() {
     });
 
     test('show history', () {
-      expect(
-        parse('show history').command!.type,
-        VoiceCommandType.showHistory,
-      );
+      expect(parse('show history').command!.type, VoiceCommandType.showHistory);
     });
 
     test('switch to scientific calculator', () {

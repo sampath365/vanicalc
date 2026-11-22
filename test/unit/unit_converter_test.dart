@@ -16,8 +16,14 @@ void main() {
   }
 
   group('length', () {
-    test('kilometre to metre', () => expect(convert('length', 'km', 'm', 1), 1000));
-    test('metre to centimetre', () => expect(convert('length', 'm', 'cm', 2), 200));
+    test(
+      'kilometre to metre',
+      () => expect(convert('length', 'km', 'm', 1), 1000),
+    );
+    test(
+      'metre to centimetre',
+      () => expect(convert('length', 'm', 'cm', 2), 200),
+    );
     test('inch to centimetre', () {
       expect(convert('length', 'in', 'cm', 1), closeTo(2.54, 1e-9));
     });
@@ -30,7 +36,10 @@ void main() {
   });
 
   group('weight', () {
-    test('kilogram to gram', () => expect(convert('weight', 'kg', 'g', 2), 2000));
+    test(
+      'kilogram to gram',
+      () => expect(convert('weight', 'kg', 'g', 2), 2000),
+    );
     test('pound to kilogram', () {
       expect(convert('weight', 'lb', 'kg', 1), closeTo(0.45359237, 1e-9));
     });

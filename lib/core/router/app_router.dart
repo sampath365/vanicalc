@@ -49,9 +49,8 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/calculator',
-                builder: (context, state) => CalculatorScreen(
-                  initialExpression: state.extra as String?,
-                ),
+                builder: (context, state) =>
+                    CalculatorScreen(initialExpression: state.extra as String?),
               ),
             ],
           ),
@@ -121,30 +120,18 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/profit-loss',
         builder: (context, state) => const ProfitLossScreen(),
       ),
-      GoRoute(
-        path: '/emi',
-        builder: (context, state) => const EmiScreen(),
-      ),
+      GoRoute(path: '/emi', builder: (context, state) => const EmiScreen()),
       GoRoute(
         path: '/interest',
         builder: (context, state) => const InterestScreen(),
       ),
-      GoRoute(
-        path: '/tip',
-        builder: (context, state) => const TipScreen(),
-      ),
-      GoRoute(
-        path: '/ratio',
-        builder: (context, state) => const RatioScreen(),
-      ),
+      GoRoute(path: '/tip', builder: (context, state) => const TipScreen()),
+      GoRoute(path: '/ratio', builder: (context, state) => const RatioScreen()),
       GoRoute(
         path: '/fraction',
         builder: (context, state) => const FractionScreen(),
       ),
-      GoRoute(
-        path: '/age',
-        builder: (context, state) => const AgeScreen(),
-      ),
+      GoRoute(path: '/age', builder: (context, state) => const AgeScreen()),
       GoRoute(
         path: '/date-difference',
         builder: (context, state) => const DateDifferenceScreen(),

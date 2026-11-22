@@ -6,23 +6,23 @@ void main() {
   const engine = NumberToWordsEngine();
 
   String indian(num value, {String language = 'en'}) => engine.convert(
-        value,
-        languageCode: language,
-        system: NumberSystem.indian,
-      );
+    value,
+    languageCode: language,
+    system: NumberSystem.indian,
+  );
 
   String international(num value, {String language = 'en'}) => engine.convert(
-        value,
-        languageCode: language,
-        system: NumberSystem.international,
-      );
+    value,
+    languageCode: language,
+    system: NumberSystem.international,
+  );
 
   String currency(num value, {String language = 'en'}) => engine.convert(
-        value,
-        languageCode: language,
-        system: NumberSystem.indian,
-        currency: true,
-      );
+    value,
+    languageCode: language,
+    system: NumberSystem.indian,
+    currency: true,
+  );
 
   group('English Indian numbering', () {
     test('100', () => expect(indian(100), 'One Hundred'));
@@ -58,10 +58,16 @@ void main() {
 
   group('decimals and negatives', () {
     test('decimal', () {
-      expect(engine.fromString('12.5', languageCode: 'en'), 'Twelve Point Five');
+      expect(
+        engine.fromString('12.5', languageCode: 'en'),
+        'Twelve Point Five',
+      );
     });
     test('decimal with trailing zero', () {
-      expect(engine.fromString('12.50', languageCode: 'en'), 'Twelve Point Five');
+      expect(
+        engine.fromString('12.50', languageCode: 'en'),
+        'Twelve Point Five',
+      );
     });
     test('negative', () {
       expect(engine.fromString('-5', languageCode: 'en'), 'Minus Five');
@@ -79,10 +85,7 @@ void main() {
 
   group('currency', () {
     test('rupees only', () {
-      expect(
-        currency(11800),
-        'Eleven Thousand Eight Hundred Rupees Only',
-      );
+      expect(currency(11800), 'Eleven Thousand Eight Hundred Rupees Only');
     });
     test('single rupee is singular', () {
       expect(currency(1), 'One Rupee Only');
@@ -102,7 +105,10 @@ void main() {
   group('Telugu', () {
     test('60 is అరవై', () => expect(indian(60, language: 'te'), 'అరవై'));
     test('25', () => expect(indian(25, language: 'te'), 'ఇరవై ఐదు'));
-    test('125 uses నూట', () => expect(indian(125, language: 'te'), 'నూట ఇరవై ఐదు'));
+    test(
+      '125 uses నూట',
+      () => expect(indian(125, language: 'te'), 'నూట ఇరవై ఐదు'),
+    );
     test('200 uses plural hundreds', () {
       expect(indian(200, language: 'te'), 'రెండు వందలు');
     });
@@ -116,13 +122,19 @@ void main() {
     test('60 is साठ', () => expect(indian(60, language: 'hi'), 'साठ'));
     test('25', () => expect(indian(25, language: 'hi'), 'पच्चीस'));
     test('100', () => expect(indian(100, language: 'hi'), 'एक सौ'));
-    test('11800', () => expect(indian(11800, language: 'hi'), contains('ग्यारह')));
+    test(
+      '11800',
+      () => expect(indian(11800, language: 'hi'), contains('ग्यारह')),
+    );
   });
 
   group('Tamil', () {
     test('60 is அறுபது', () => expect(indian(60, language: 'ta'), 'அறுபது'));
     test('25', () => expect(indian(25, language: 'ta'), 'இருபத்தைந்து'));
-    test('125', () => expect(indian(125, language: 'ta'), 'நூற்று இருபத்தைந்து'));
+    test(
+      '125',
+      () => expect(indian(125, language: 'ta'), 'நூற்று இருபத்தைந்து'),
+    );
     test('1000', () => expect(indian(1000, language: 'ta'), 'ஆயிரம்'));
   });
 

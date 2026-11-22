@@ -16,8 +16,9 @@ class SpeakResultScreen extends ConsumerStatefulWidget {
 }
 
 class _SpeakResultScreenState extends ConsumerState<SpeakResultScreen> {
-  final TextEditingController _controller =
-      TextEditingController(text: '125 + 275');
+  final TextEditingController _controller = TextEditingController(
+    text: '125 + 275',
+  );
   bool _calculationMode = true;
 
   @override
@@ -34,14 +35,18 @@ class _SpeakResultScreenState extends ConsumerState<SpeakResultScreen> {
     if (_calculationMode) {
       final outcome = ref.read(expressionEngineProvider).evaluate(input);
       if (!outcome.isSuccess) return null;
-      return ref.read(calculationSpeakerProvider).calculationSentence(
+      return ref
+          .read(calculationSpeakerProvider)
+          .calculationSentence(
             input,
             outcome.value!,
             language,
             system: settings.numberSystem,
           );
     }
-    final words = ref.read(numberToWordsEngineProvider).fromString(
+    final words = ref
+        .read(numberToWordsEngineProvider)
+        .fromString(
           input,
           languageCode: language.code,
           system: settings.numberSystem,
@@ -54,7 +59,9 @@ class _SpeakResultScreenState extends ConsumerState<SpeakResultScreen> {
     if (sentence == null) return;
     final settings = ref.read(settingsControllerProvider);
     try {
-      await ref.read(speechSynthesizerProvider).speak(
+      await ref
+          .read(speechSynthesizerProvider)
+          .speak(
             sentence,
             locale: settings.effectiveTtsLanguage.ttsLocale,
             rate: settings.speechRate,

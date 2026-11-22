@@ -114,8 +114,11 @@ class CalcPalette extends ThemeExtension<CalcPalette> {
       onNumber: Color.lerp(onNumber, other.onNumber, t)!,
       onOperator: Color.lerp(onOperator, other.onOperator, t)!,
       onFunction: Color.lerp(onFunction, other.onFunction, t)!,
-      displayBackground:
-          Color.lerp(displayBackground, other.displayBackground, t)!,
+      displayBackground: Color.lerp(
+        displayBackground,
+        other.displayBackground,
+        t,
+      )!,
       shadow: Color.lerp(shadow, other.shadow, t)!,
       equalsStart: Color.lerp(equalsStart, other.equalsStart, t)!,
       equalsEnd: Color.lerp(equalsEnd, other.equalsEnd, t)!,

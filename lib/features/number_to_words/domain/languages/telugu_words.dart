@@ -8,13 +8,39 @@ class TeluguNumberWords extends NumberWordsLanguage {
   String get code => 'te';
 
   static const List<String> _belowTwenty = <String>[
-    'సున్నా', 'ఒకటి', 'రెండు', 'మూడు', 'నాలుగు', 'ఐదు', 'ఆరు', 'ఏడు',
-    'ఎనిమిది', 'తొమ్మిది', 'పది', 'పదకొండు', 'పన్నెండు', 'పదమూడు',
-    'పద్నాలుగు', 'పదిహేను', 'పదహారు', 'పదిహేడు', 'పద్దెనిమిది', 'పంతొమ్మిది',
+    'సున్నా',
+    'ఒకటి',
+    'రెండు',
+    'మూడు',
+    'నాలుగు',
+    'ఐదు',
+    'ఆరు',
+    'ఏడు',
+    'ఎనిమిది',
+    'తొమ్మిది',
+    'పది',
+    'పదకొండు',
+    'పన్నెండు',
+    'పదమూడు',
+    'పద్నాలుగు',
+    'పదిహేను',
+    'పదహారు',
+    'పదిహేడు',
+    'పద్దెనిమిది',
+    'పంతొమ్మిది',
   ];
 
   static const List<String> _tens = <String>[
-    '', '', 'ఇరవై', 'ముప్పై', 'నలభై', 'యాభై', 'అరవై', 'డెబ్బై', 'ఎనభై', 'తొంభై',
+    '',
+    '',
+    'ఇరవై',
+    'ముప్పై',
+    'నలభై',
+    'యాభై',
+    'అరవై',
+    'డెబ్బై',
+    'ఎనభై',
+    'తొంభై',
   ];
 
   static final List<String> _words = _build();
@@ -23,7 +49,9 @@ class TeluguNumberWords extends NumberWordsLanguage {
     final words = <String>[..._belowTwenty];
     for (var tens = 2; tens <= 9; tens++) {
       for (var unit = 0; unit <= 9; unit++) {
-        words.add(unit == 0 ? _tens[tens] : '${_tens[tens]} ${_belowTwenty[unit]}');
+        words.add(
+          unit == 0 ? _tens[tens] : '${_tens[tens]} ${_belowTwenty[unit]}',
+        );
       }
     }
     return List<String>.unmodifiable(words);

@@ -13,10 +13,10 @@ enum AppThemeMode {
   final String key;
 
   ThemeMode get themeMode => switch (this) {
-        AppThemeMode.light => ThemeMode.light,
-        AppThemeMode.dark => ThemeMode.dark,
-        AppThemeMode.system => ThemeMode.system,
-      };
+    AppThemeMode.light => ThemeMode.light,
+    AppThemeMode.dark => ThemeMode.dark,
+    AppThemeMode.system => ThemeMode.system,
+  };
 
   static AppThemeMode fromKey(String? key) {
     return AppThemeMode.values.firstWhere(
@@ -30,29 +30,34 @@ enum AppThemeMode {
 class AppTheme {
   const AppTheme._();
 
-  static ThemeData light(AccentPalette accent) => _build(accent, Brightness.light);
+  static ThemeData light(AccentPalette accent) =>
+      _build(accent, Brightness.light);
 
-  static ThemeData dark(AccentPalette accent) => _build(accent, Brightness.dark);
+  static ThemeData dark(AccentPalette accent) =>
+      _build(accent, Brightness.dark);
 
   static ThemeData _build(AccentPalette accent, Brightness brightness) {
     final isDark = brightness == Brightness.dark;
-    final scheme = ColorScheme.fromSeed(
-      seedColor: accent.seed,
-      brightness: brightness,
-    ).copyWith(
-      surface: isDark ? AppColors.darkSurface : AppColors.lightSurface,
-      primary: accent.seed,
-      secondary: accent.secondary,
-      error: AppColors.danger,
-    );
+    final scheme =
+        ColorScheme.fromSeed(
+          seedColor: accent.seed,
+          brightness: brightness,
+        ).copyWith(
+          surface: isDark ? AppColors.darkSurface : AppColors.lightSurface,
+          primary: accent.seed,
+          secondary: accent.secondary,
+          error: AppColors.danger,
+        );
 
-    final background =
-        isDark ? AppColors.darkBackground : AppColors.lightBackground;
+    final background = isDark
+        ? AppColors.darkBackground
+        : AppColors.lightBackground;
     final textColor = isDark ? AppColors.darkText : AppColors.lightText;
     final muted = isDark ? AppColors.darkTextMuted : AppColors.lightTextMuted;
     final border = isDark ? AppColors.darkBorder : AppColors.lightBorder;
-    final surfaceAlt =
-        isDark ? AppColors.darkSurfaceAlt : AppColors.lightSurfaceAlt;
+    final surfaceAlt = isDark
+        ? AppColors.darkSurfaceAlt
+        : AppColors.lightSurfaceAlt;
 
     final baseText = TextTheme(
       displayLarge: TextStyle(
@@ -141,8 +146,10 @@ class AppTheme {
         fillColor: isDark ? AppColors.darkSurface : AppColors.lightSurface,
         hintStyle: TextStyle(color: muted, fontSize: 15),
         labelStyle: TextStyle(color: muted),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 18,
+          vertical: 16,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(18),
           borderSide: BorderSide(color: border),
@@ -217,18 +224,13 @@ class AppTheme {
         }),
         iconTheme: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
-          return IconThemeData(
-            size: 24,
-            color: selected ? accent.seed : muted,
-          );
+          return IconThemeData(size: 24, color: selected ? accent.seed : muted);
         }),
       ),
       dialogTheme: DialogThemeData(
         backgroundColor: isDark ? AppColors.darkSurface : Colors.white,
         surfaceTintColor: Colors.transparent,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(26),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
       ),
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: isDark ? AppColors.darkSurface : Colors.white,
@@ -239,19 +241,17 @@ class AppTheme {
       ),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
-        backgroundColor: isDark ? AppColors.darkSurfaceAlt : AppColors.lightText,
+        backgroundColor: isDark
+            ? AppColors.darkSurfaceAlt
+            : AppColors.lightText,
         contentTextStyle: const TextStyle(color: Colors.white, fontSize: 14),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       ),
       chipTheme: ChipThemeData(
         backgroundColor: surfaceAlt,
         side: BorderSide(color: border),
         labelStyle: TextStyle(color: textColor, fontSize: 13),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       sliderTheme: SliderThemeData(
         activeTrackColor: accent.seed,
@@ -266,9 +266,8 @@ class AppTheme {
               : (isDark ? AppColors.darkTextMuted : Colors.white),
         ),
         trackColor: WidgetStateProperty.resolveWith(
-          (states) => states.contains(WidgetState.selected)
-              ? accent.seed
-              : border,
+          (states) =>
+              states.contains(WidgetState.selected) ? accent.seed : border,
         ),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(color: accent.seed),
@@ -286,8 +285,9 @@ class AppTheme {
           onNumber: textColor,
           onOperator: accent.seed,
           onFunction: muted,
-          displayBackground:
-              isDark ? AppColors.darkSurface : AppColors.lightSurface,
+          displayBackground: isDark
+              ? AppColors.darkSurface
+              : AppColors.lightSurface,
           shadow: isDark
               ? Colors.black.withValues(alpha: 0.35)
               : const Color(0xFF94A3B8).withValues(alpha: 0.18),

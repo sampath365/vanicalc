@@ -8,19 +8,55 @@ class KannadaNumberWords extends NumberWordsLanguage {
   String get code => 'kn';
 
   static const List<String> _belowTwenty = <String>[
-    'ಶೂನ್ಯ', 'ಒಂದು', 'ಎರಡು', 'ಮೂರು', 'ನಾಲ್ಕು', 'ಐದು', 'ಆರು', 'ಏಳು', 'ಎಂಟು',
-    'ಒಂಬತ್ತು', 'ಹತ್ತು', 'ಹನ್ನೊಂದು', 'ಹನ್ನೆರಡು', 'ಹದಿಮೂರು', 'ಹದಿನಾಲ್ಕು',
-    'ಹದಿನೈದು', 'ಹದಿನಾರು', 'ಹದಿನೇಳು', 'ಹದಿನೆಂಟು', 'ಹತ್ತೊಂಬತ್ತು',
+    'ಶೂನ್ಯ',
+    'ಒಂದು',
+    'ಎರಡು',
+    'ಮೂರು',
+    'ನಾಲ್ಕು',
+    'ಐದು',
+    'ಆರು',
+    'ಏಳು',
+    'ಎಂಟು',
+    'ಒಂಬತ್ತು',
+    'ಹತ್ತು',
+    'ಹನ್ನೊಂದು',
+    'ಹನ್ನೆರಡು',
+    'ಹದಿಮೂರು',
+    'ಹದಿನಾಲ್ಕು',
+    'ಹದಿನೈದು',
+    'ಹದಿನಾರು',
+    'ಹದಿನೇಳು',
+    'ಹದಿನೆಂಟು',
+    'ಹತ್ತೊಂಬತ್ತು',
   ];
 
   static const List<String> _tensWords = <String>[
-    '', '', 'ಇಪ್ಪತ್ತು', 'ಮೂವತ್ತು', 'ನಲವತ್ತು', 'ಐವತ್ತು', 'ಅರವತ್ತು', 'ಎಪ್ಪತ್ತು',
-    'ಎಂಬತ್ತು', 'ತೊಂಬತ್ತು',
+    '',
+    '',
+    'ಇಪ್ಪತ್ತು',
+    'ಮೂವತ್ತು',
+    'ನಲವತ್ತು',
+    'ಐವತ್ತು',
+    'ಅರವತ್ತು',
+    'ಎಪ್ಪತ್ತು',
+    'ಎಂಬತ್ತು',
+    'ತೊಂಬತ್ತು',
   ];
 
   static const Map<String, String> _vowels = <String, String>{
-    'ಅ': '', 'ಆ': 'ಾ', 'ಇ': 'ಿ', 'ಈ': 'ೀ', 'ಉ': 'ು', 'ಊ': 'ೂ', 'ಋ': 'ೃ',
-    'ಎ': 'ೆ', 'ಏ': 'ೇ', 'ಐ': 'ೈ', 'ಒ': 'ೊ', 'ಓ': 'ೋ', 'ಔ': 'ೌ',
+    'ಅ': '',
+    'ಆ': 'ಾ',
+    'ಇ': 'ಿ',
+    'ಈ': 'ೀ',
+    'ಉ': 'ು',
+    'ಊ': 'ೂ',
+    'ಋ': 'ೃ',
+    'ಎ': 'ೆ',
+    'ಏ': 'ೇ',
+    'ಐ': 'ೈ',
+    'ಒ': 'ೊ',
+    'ಓ': 'ೋ',
+    'ಔ': 'ೌ',
   };
 
   static final List<String> _words = _build();
@@ -38,7 +74,9 @@ class KannadaNumberWords extends NumberWordsLanguage {
         final unitWord = _belowTwenty[unit];
         final sign = joiner.leadingVowelSign(unitWord);
         words.add(
-          sign == null ? '$stem$unitWord' : '$stem${joiner.applySign(unitWord, sign)}',
+          sign == null
+              ? '$stem$unitWord'
+              : '$stem${joiner.applySign(unitWord, sign)}',
         );
       }
     }
@@ -81,8 +119,16 @@ class KannadaNumberWords extends NumberWordsLanguage {
   bool get pluralizesCurrency => false;
 
   static const List<String> _hundreds = <String>[
-    '', 'ನೂರು', 'ಇನ್ನೂರು', 'ಮುನ್ನೂರು', 'ನಾನೂರು', 'ಐನೂರು', 'ಆರುನೂರು',
-    'ಏಳುನೂರು', 'ಎಂಟುನೂರು', 'ಒಂಬೈನೂರು',
+    '',
+    'ನೂರು',
+    'ಇನ್ನೂರು',
+    'ಮುನ್ನೂರು',
+    'ನಾನೂರು',
+    'ಐನೂರು',
+    'ಆರುನೂರು',
+    'ಏಳುನೂರು',
+    'ಎಂಟುನೂರು',
+    'ಒಂಬೈನೂರು',
   ];
 
   @override

@@ -39,7 +39,9 @@ class SettingsRepository {
       onboardingSeen: _prefs.getBool(_onboardingKey) ?? false,
       speechRate: _prefs.getDouble(_speechRateKey) ?? 0.5,
       speechPitch: _prefs.getDouble(_speechPitchKey) ?? 1.0,
-      speechLanguage: speechCode == null ? null : AppLanguage.fromCode(speechCode),
+      speechLanguage: speechCode == null
+          ? null
+          : AppLanguage.fromCode(speechCode),
       ttsLanguage: ttsCode == null ? null : AppLanguage.fromCode(ttsCode),
     );
   }

@@ -110,8 +110,10 @@ const Map<String, String> enStrings = <String, String>{
   'voice_examples': 'Try saying',
   'voice_no_speech': 'I did not catch that. Please try again.',
   'voice_unavailable': 'Speech recognition is not available on this device.',
-  'voice_permission_denied': 'Microphone permission is required for voice input.',
-  'voice_unclear': 'I am not sure about that. Please confirm or edit the expression.',
+  'voice_permission_denied':
+      'Microphone permission is required for voice input.',
+  'voice_unclear':
+      'I am not sure about that. Please confirm or edit the expression.',
   'voice_confirm_title': 'Is this correct?',
   'voice_confirm_message': 'Please confirm the recognised calculation.',
   'voice_use_this': 'Use this',
@@ -146,10 +148,10 @@ const Map<String, String> enStrings = <String, String>{
   'words_currency_suffix': 'rupees',
 
   'language_title': 'Language',
-  'language_subtitle': 'Choose the language for the app, voice input and speech',
+  'language_subtitle':
+      'Choose the language for the app, voice input and speech',
   'language_selected': 'Selected',
-  'language_note':
-      'Number words and speech work offline in every language. A few advanced tool labels remain in English.',
+  'language_note': 'Number words and speech work offline in every language. A few advanced tool labels remain in English.',
   'language_search_hint': 'Search languages',
   'language_speech_support': 'Voice input and speech supported',
 
@@ -255,8 +257,7 @@ const Map<String, String> enStrings = <String, String>{
   'onboarding_2_desc':
       'Say “25 plus 35” in English, Telugu, Hindi and seven more languages.',
   'onboarding_3_title': 'Numbers in words',
-  'onboarding_3_desc':
-      'Convert amounts to words with Indian lakh and crore, then speak them aloud.',
+  'onboarding_3_desc': 'Convert amounts to words with Indian lakh and crore, then speak them aloud.',
   'onboarding_skip': 'Skip',
   'onboarding_next': 'Next',
   'onboarding_start': 'Start calculating',

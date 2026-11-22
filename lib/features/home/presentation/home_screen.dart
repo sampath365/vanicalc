@@ -71,7 +71,9 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(settingsControllerProvider);
     final history = ref.watch(historyControllerProvider);
-    final todayCount = history.where((record) => _isToday(record.createdAt)).length;
+    final todayCount = history
+        .where((record) => _isToday(record.createdAt))
+        .length;
     final favoriteCount = history.where((record) => record.favorite).length;
     final recent = history.take(3).toList(growable: false);
     final width = MediaQuery.sizeOf(context).width;
@@ -257,7 +259,9 @@ class HomeScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton.large(
         onPressed: () => context.push('/voice'),
-        backgroundColor: Theme.of(context).extension<CalcPalette>()?.equalsStart,
+        backgroundColor: Theme.of(context)
+            .extension<CalcPalette>()
+            ?.equalsStart,
         foregroundColor: Colors.white,
         child: const Icon(Icons.mic_rounded, size: 30),
       ),
@@ -266,7 +270,9 @@ class HomeScreen extends ConsumerWidget {
 
   bool _isToday(DateTime date) {
     final now = DateTime.now();
-    return now.year == date.year && now.month == date.month && now.day == date.day;
+    return now.year == date.year &&
+        now.month == date.month &&
+        now.day == date.day;
   }
 
   Future<void> _copy(
@@ -290,14 +296,18 @@ class HomeScreen extends ConsumerWidget {
     final value = record.value ?? double.tryParse(record.result);
     final text = value == null
         ? record.result
-        : ref.read(calculationSpeakerProvider).calculationSentence(
-              record.expression,
-              value,
-              settings.effectiveTtsLanguage,
-              system: settings.numberSystem,
-            );
+        : ref
+              .read(calculationSpeakerProvider)
+              .calculationSentence(
+                record.expression,
+                value,
+                settings.effectiveTtsLanguage,
+                system: settings.numberSystem,
+              );
     try {
-      await ref.read(speechSynthesizerProvider).speak(
+      await ref
+          .read(speechSynthesizerProvider)
+          .speak(
             text,
             locale: settings.effectiveTtsLanguage.ttsLocale,
             rate: settings.speechRate,
@@ -345,10 +355,7 @@ class _LanguageChip extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              settings.language.flag,
-              style: const TextStyle(fontSize: 14),
-            ),
+            Text(settings.language.flag, style: const TextStyle(fontSize: 14)),
             const SizedBox(width: 6),
             ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 90),
@@ -395,7 +402,9 @@ class _HeroButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: filled ? Colors.white : Colors.white.withValues(alpha: 0.16),
           borderRadius: BorderRadius.circular(16),
-          border: filled ? null : Border.all(color: Colors.white.withValues(alpha: 0.4)),
+          border: filled
+              ? null
+              : Border.all(color: Colors.white.withValues(alpha: 0.4)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

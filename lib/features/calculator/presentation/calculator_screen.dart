@@ -90,7 +90,9 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.scientific ? context.tr('calc_scientific') : context.tr('calc_title'),
+          widget.scientific
+              ? context.tr('calc_scientific')
+              : context.tr('calc_title'),
         ),
         actions: [
           IconButton(
@@ -156,10 +158,7 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
                               const SizedBox(width: 14),
                               Expanded(
                                 flex: 2,
-                                child: _SidePanel(
-                                  state: state,
-                                  onKey: _onKey,
-                                ),
+                                child: _SidePanel(state: state, onKey: _onKey),
                               ),
                             ],
                           )
@@ -198,7 +197,9 @@ class _DisplayCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final palette = theme.extension<CalcPalette>()!;
-    final errorText = state.errorCode == null ? null : context.tr(state.errorCode!);
+    final errorText = state.errorCode == null
+        ? null
+        : context.tr(state.errorCode!);
     final display = state.result.isNotEmpty
         ? state.result
         : (state.preview.isNotEmpty ? state.preview : '0');
@@ -258,7 +259,10 @@ class _DisplayCard extends StatelessWidget {
                 transitionBuilder: (child, animation) => FadeTransition(
                   opacity: animation,
                   child: ScaleTransition(
-                    scale: Tween<double>(begin: 0.94, end: 1).animate(animation),
+                    scale: Tween<double>(
+                      begin: 0.94,
+                      end: 1,
+                    ).animate(animation),
                     alignment: Alignment.centerRight,
                     child: child,
                   ),
@@ -275,8 +279,8 @@ class _DisplayCard extends StatelessWidget {
                       color: errorText != null
                           ? AppColors.danger
                           : isPreview
-                              ? theme.colorScheme.primary.withValues(alpha: 0.55)
-                              : theme.colorScheme.onSurface,
+                          ? theme.colorScheme.primary.withValues(alpha: 0.55)
+                          : theme.colorScheme.onSurface,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -313,7 +317,10 @@ class _SidePanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(context.tr('home_quick_tools'), style: theme.textTheme.titleMedium),
+          Text(
+            context.tr('home_quick_tools'),
+            style: theme.textTheme.titleMedium,
+          ),
           const SizedBox(height: 12),
           Expanded(
             child: SingleChildScrollView(

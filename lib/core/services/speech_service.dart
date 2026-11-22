@@ -43,7 +43,7 @@ abstract class SpeechRecognizer {
 /// `speech_to_text` backed implementation.
 class DeviceSpeechRecognizer implements SpeechRecognizer {
   DeviceSpeechRecognizer([stt.SpeechToText? speech])
-      : _speech = speech ?? stt.SpeechToText();
+    : _speech = speech ?? stt.SpeechToText();
 
   final stt.SpeechToText _speech;
   bool _initialized = false;

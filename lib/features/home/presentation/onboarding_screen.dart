@@ -90,7 +90,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                             borderRadius: BorderRadius.circular(52),
                             boxShadow: [
                               BoxShadow(
-                                color: page.colors.first.withValues(alpha: 0.32),
+                                color: page.colors.first.withValues(
+                                  alpha: 0.32,
+                                ),
                                 blurRadius: 36,
                                 offset: const Offset(0, 18),
                               ),
@@ -143,7 +145,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 label: isLast
                     ? context.tr('onboarding_start')
                     : context.tr('onboarding_next'),
-                icon: isLast ? Icons.rocket_launch_rounded : Icons.arrow_forward_rounded,
+                icon: isLast
+                    ? Icons.rocket_launch_rounded
+                    : Icons.arrow_forward_rounded,
                 onPressed: () {
                   if (isLast) {
                     _finish();

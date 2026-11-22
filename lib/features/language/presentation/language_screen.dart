@@ -21,13 +21,15 @@ class _LanguageScreenState extends ConsumerState<LanguageScreen> {
   Widget build(BuildContext context) {
     final settings = ref.watch(settingsControllerProvider);
     final theme = Theme.of(context);
-    final languages = AppLanguage.values.where((language) {
-      if (_query.trim().isEmpty) return true;
-      final query = _query.toLowerCase();
-      return language.englishName.toLowerCase().contains(query) ||
-          language.nativeName.toLowerCase().contains(query) ||
-          language.code.contains(query);
-    }).toList(growable: false);
+    final languages = AppLanguage.values
+        .where((language) {
+          if (_query.trim().isEmpty) return true;
+          final query = _query.toLowerCase();
+          return language.englishName.toLowerCase().contains(query) ||
+              language.nativeName.toLowerCase().contains(query) ||
+              language.code.contains(query);
+        })
+        .toList(growable: false);
 
     return Scaffold(
       appBar: AppBar(title: Text(context.tr('language_title'))),
@@ -131,10 +133,7 @@ class _LanguageTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  language.nativeName,
-                  style: theme.textTheme.titleMedium,
-                ),
+                Text(language.nativeName, style: theme.textTheme.titleMedium),
                 const SizedBox(height: 2),
                 Text(
                   '${language.englishName} • ${context.tr('language_speech_support')}',

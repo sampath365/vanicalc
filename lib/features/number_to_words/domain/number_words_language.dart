@@ -143,18 +143,22 @@ abstract class NumberWordsLanguage {
       if (negative) words.write('$minusWord ');
       words.write(integerToWords(whole, system));
       words.write(' ');
-      words.write(whole == 1 && pluralizesCurrency
-          ? currencyUnitSingular
-          : currencyUnitPlural);
+      words.write(
+        whole == 1 && pluralizesCurrency
+            ? currencyUnitSingular
+            : currencyUnitPlural,
+      );
       if (fractionText.isNotEmpty) {
         final subunits = int.parse(fractionText);
         if (subunits > 0) {
           words.write(' ');
           words.write(integerToWords(subunits, system));
           words.write(' ');
-          words.write(subunits == 1 && pluralizesCurrency
-              ? currencySubunitSingular
-              : currencySubunitPlural);
+          words.write(
+            subunits == 1 && pluralizesCurrency
+                ? currencySubunitSingular
+                : currencySubunitPlural,
+          );
         }
       }
       words.write(' ');
@@ -167,13 +171,18 @@ abstract class NumberWordsLanguage {
     buffer.write(integerToWords(whole, system));
     if (fractionText.isNotEmpty) {
       buffer.write(' $pointWord ');
-      buffer.write(fractionText.split('').map((d) => unitWord(int.parse(d))).join(' '));
+      buffer.write(
+        fractionText.split('').map((d) => unitWord(int.parse(d))).join(' '),
+      );
     }
     return buffer.toString().trim();
   }
 
   /// Converts a non-negative integer using the requested grouping.
-  String integerToWords(int value, [NumberSystem system = NumberSystem.indian]) {
+  String integerToWords(
+    int value, [
+    NumberSystem system = NumberSystem.indian,
+  ]) {
     if (value < 0) {
       return '$minusWord ${integerToWords(-value, system)}';
     }
@@ -229,12 +238,7 @@ abstract class NumberWordsLanguage {
   String _internationalGrouping(int value) {
     final parts = <String>[];
     var remaining = value;
-    const scales = <int>[
-      1000000000000,
-      1000000000,
-      1000000,
-      1000,
-    ];
+    const scales = <int>[1000000000000, 1000000000, 1000000, 1000];
     final names = <String>[
       trillionWord,
       billionWord,
@@ -265,8 +269,9 @@ abstract class NumberWordsLanguage {
     NumberSystem system, {
     bool hasRemainder = false,
   }) {
-    final countWords =
-        count < 100 ? unitWord(count) : integerToWords(count, system);
+    final countWords = count < 100
+        ? unitWord(count)
+        : integerToWords(count, system);
     return scaleFormForCount(count, countWords, scale, hasRemainder);
   }
 

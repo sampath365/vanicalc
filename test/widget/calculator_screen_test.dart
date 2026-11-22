@@ -34,12 +34,8 @@ void main() {
   }
 
   testWidgets('adds two numbers with the keypad', (tester) async {
-
     await tester.pumpWidget(
-      wrapForTest(
-        const CalculatorScreen(),
-        overrides: environment.overrides,
-      ),
+      wrapForTest(const CalculatorScreen(), overrides: environment.overrides),
     );
     await tester.pump();
 
@@ -53,12 +49,8 @@ void main() {
   });
 
   testWidgets('respects operator precedence', (tester) async {
-
     await tester.pumpWidget(
-      wrapForTest(
-        const CalculatorScreen(),
-        overrides: environment.overrides,
-      ),
+      wrapForTest(const CalculatorScreen(), overrides: environment.overrides),
     );
     await tester.pump();
 
@@ -73,12 +65,8 @@ void main() {
   });
 
   testWidgets('clear resets the expression', (tester) async {
-
     await tester.pumpWidget(
-      wrapForTest(
-        const CalculatorScreen(),
-        overrides: environment.overrides,
-      ),
+      wrapForTest(const CalculatorScreen(), overrides: environment.overrides),
     );
     await tester.pump();
 
@@ -91,12 +79,8 @@ void main() {
   });
 
   testWidgets('divide by zero shows an error', (tester) async {
-
     await tester.pumpWidget(
-      wrapForTest(
-        const CalculatorScreen(),
-        overrides: environment.overrides,
-      ),
+      wrapForTest(const CalculatorScreen(), overrides: environment.overrides),
     );
     await tester.pump();
 
@@ -109,7 +93,6 @@ void main() {
   });
 
   testWidgets('scientific keypad computes a power', (tester) async {
-
     await tester.pumpWidget(
       wrapForTest(
         const CalculatorScreen(scientific: true),
@@ -127,12 +110,8 @@ void main() {
   });
 
   testWidgets('square root shortcut works', (tester) async {
-
     await tester.pumpWidget(
-      wrapForTest(
-        const CalculatorScreen(),
-        overrides: environment.overrides,
-      ),
+      wrapForTest(const CalculatorScreen(), overrides: environment.overrides),
     );
     await tester.pump();
 
@@ -147,12 +126,8 @@ void main() {
   });
 
   testWidgets('memory stores and recalls a value', (tester) async {
-
     await tester.pumpWidget(
-      wrapForTest(
-        const CalculatorScreen(),
-        overrides: environment.overrides,
-      ),
+      wrapForTest(const CalculatorScreen(), overrides: environment.overrides),
     );
     await tester.pump();
 
@@ -168,7 +143,6 @@ void main() {
   });
 
   testWidgets('loads a reused expression', (tester) async {
-
     await tester.pumpWidget(
       wrapForTest(
         const CalculatorScreen(initialExpression: '25*4'),
@@ -182,7 +156,6 @@ void main() {
   });
 
   testWidgets('renders in Telugu', (tester) async {
-
     await tester.pumpWidget(
       wrapForTest(
         const CalculatorScreen(),

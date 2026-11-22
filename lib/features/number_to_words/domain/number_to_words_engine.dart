@@ -28,9 +28,11 @@ class NumberToWordsEngine {
     'pa': PunjabiNumberWords(),
   };
 
-  static List<String> get supportedCodes => _languages.keys.toList(growable: false);
+  static List<String> get supportedCodes =>
+      _languages.keys.toList(growable: false);
 
-  static List<NumberWordsLanguage> get all => _languages.values.toList(growable: false);
+  static List<NumberWordsLanguage> get all =>
+      _languages.values.toList(growable: false);
 
   NumberWordsLanguage languageFor(String code) {
     return _languages[code] ?? _languages['en']!;
@@ -42,11 +44,8 @@ class NumberToWordsEngine {
     NumberSystem system = NumberSystem.indian,
     bool currency = false,
   }) {
-    return languageFor(languageCode).convert(
-      value,
-      system: system,
-      currency: currency,
-    );
+    return languageFor(languageCode)
+        .convert(value, system: system, currency: currency);
   }
 
   String fromString(
@@ -55,11 +54,8 @@ class NumberToWordsEngine {
     NumberSystem system = NumberSystem.indian,
     bool currency = false,
   }) {
-    return languageFor(languageCode).fromString(
-      raw,
-      system: system,
-      currency: currency,
-    );
+    return languageFor(languageCode)
+        .fromString(raw, system: system, currency: currency);
   }
 }
 

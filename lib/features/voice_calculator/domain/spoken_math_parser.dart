@@ -43,7 +43,8 @@ class SpokenParseResult {
 
   bool get isCommand => command != null;
 
-  bool get isCalculation => !isCommand && expression.isNotEmpty && errorCode == null;
+  bool get isCalculation =>
+      !isCommand && expression.isNotEmpty && errorCode == null;
 }
 
 /// Interprets natural spoken mathematics in ten languages and converts it into
@@ -143,8 +144,7 @@ class SpokenMathParser {
       };
       for (final name in names) {
         if (name.length > 2 && text.contains(name)) return language;
-        if (name.length == 2 &&
-            RegExp('(^|\\s)$name(\\s|\$)').hasMatch(text)) {
+        if (name.length == 2 && RegExp('(^|\\s)$name(\\s|\$)').hasMatch(text)) {
           return language;
         }
       }
@@ -234,10 +234,10 @@ class SpokenMathParser {
     if (words.isEmpty) return null;
 
     final pointIndex = words.indexWhere(vocabulary.pointWords.contains);
-    final wholeWords =
-        pointIndex == -1 ? words : words.sublist(0, pointIndex);
-    final fractionWords =
-        pointIndex == -1 ? <String>[] : words.sublist(pointIndex + 1);
+    final wholeWords = pointIndex == -1 ? words : words.sublist(0, pointIndex);
+    final fractionWords = pointIndex == -1
+        ? <String>[]
+        : words.sublist(pointIndex + 1);
 
     final whole = _integerFromWords(wholeWords, dictionaries);
     if (whole == null) return null;
@@ -389,10 +389,8 @@ class SpokenMathParser {
     _Vocabulary english,
   ) {
     var result = text;
-    final fillers = <String>{
-      ...vocabulary.fillers,
-      ...english.fillers,
-    }..removeWhere((word) => word.trim().isEmpty);
+    final fillers = <String>{...vocabulary.fillers, ...english.fillers}
+      ..removeWhere((word) => word.trim().isEmpty);
     final ordered = fillers.toList()
       ..sort((a, b) => b.length.compareTo(a.length));
     for (final filler in ordered) {
@@ -473,10 +471,7 @@ class SpokenMathParser {
   String _normalize(String input) {
     return input
         .toLowerCase()
-        .replaceAllMapped(
-          RegExp(r'(?<!\d)\.|\.(?!\d)'),
-          (_) => ' ',
-        )
+        .replaceAllMapped(RegExp(r'(?<!\d)\.|\.(?!\d)'), (_) => ' ')
         .replaceAll('?', ' ')
         .replaceAll('!', ' ! ')
         .replaceAll('=', ' ')
@@ -508,12 +503,32 @@ class SpokenMathParser {
       cubedWords: ['cubed', 'cube of'],
       factorialWords: ['factorial'],
       pointWords: ['point', 'decimal'],
-      equalsWords: ['equals', 'equal to', 'is equal to', 'is', 'makes', 'gives'],
+      equalsWords: [
+        'equals',
+        'equal to',
+        'is equal to',
+        'is',
+        'makes',
+        'gives',
+      ],
       piWords: ['pi'],
       andWords: ['and'],
       fillers: [
-        'what', 'whats', 'calculate', 'how', 'much', 'the', 'please', 'of',
-        'result', 'answer', 'tell', 'me', 'can', 'you', 'do',
+        'what',
+        'whats',
+        'calculate',
+        'how',
+        'much',
+        'the',
+        'please',
+        'of',
+        'result',
+        'answer',
+        'tell',
+        'me',
+        'can',
+        'you',
+        'do',
       ],
     ),
     'te': _Vocabulary(
@@ -682,28 +697,70 @@ class SpokenMathParser {
 
   static const Map<VoiceCommandType, List<String>> _commandWords = {
     VoiceCommandType.clear: [
-      'clear calculator', 'clear all', 'clear the calculator', 'reset calculator',
-      'క్లియర్', 'సాఫ్ చెయ్యి', 'शून्य करो', 'साफ करो', 'साफ़ करो',
-      'அழி', 'ತೆರವು', 'മായ്ക്കുക', 'সব মুছুন', 'સાફ કરો', 'ਸਾਫ਼ ਕਰੋ',
+      'clear calculator',
+      'clear all',
+      'clear the calculator',
+      'reset calculator',
+      'క్లియర్',
+      'సాఫ్ చెయ్యి',
+      'शून्य करो',
+      'साफ करो',
+      'साफ़ करो',
+      'அழி',
+      'ತೆರವು',
+      'മായ്ക്കുക',
+      'সব মুছুন',
+      'સાફ કરો',
+      'ਸਾਫ਼ ਕਰੋ',
     ],
     VoiceCommandType.deleteLast: [
-      'delete last number', 'delete last digit', 'backspace', 'remove last digit',
-      'చివరి అంకె తొలగించు', 'आखिरी अंक हटाओ', 'काढून टाका', 'கடைசி இலக்கத்தை நீக்கு',
+      'delete last number',
+      'delete last digit',
+      'backspace',
+      'remove last digit',
+      'చివరి అంకె తొలగించు',
+      'आखिरी अंक हटाओ',
+      'काढून टाका',
+      'கடைசி இலக்கத்தை நீக்கு',
     ],
     VoiceCommandType.repeatAnswer: [
-      'repeat answer', 'repeat the answer', 'say again', 'speak again',
-      'మళ్లీ చెప్పు', 'दोहराओ', 'फिर से बोलो', 'மீண்டும் சொல்', 'ಮತ್ತೆ ಹೇಳು',
-      'വീണ്ടും പറയുക', 'पुन्हा सांगा', 'আবার বলুন', 'ફરી બોલો', 'ਦੁਬਾਰਾ ਬੋਲੋ',
+      'repeat answer',
+      'repeat the answer',
+      'say again',
+      'speak again',
+      'మళ్లీ చెప్పు',
+      'दोहराओ',
+      'फिर से बोलो',
+      'மீண்டும் சொல்',
+      'ಮತ್ತೆ ಹೇಳು',
+      'വീണ്ടും പറയുക',
+      'पुन्हा सांगा',
+      'আবার বলুন',
+      'ફરી બોલો',
+      'ਦੁਬਾਰਾ ਬੋਲੋ',
     ],
     VoiceCommandType.showHistory: [
-      'show history', 'open history', 'calculation history',
-      'చరిత్ర చూపించు', 'इतिहास दिखाओ', 'வரலாறு காட்டு', 'ಇತಿಹಾಸ ತೋರಿಸು',
-      'ചരിത്രം കാണിക്കുക', 'इतिहास दाखवा', 'ইতিহাস দেখান', 'ઇતિહાસ બતાવો',
+      'show history',
+      'open history',
+      'calculation history',
+      'చరిత్ర చూపించు',
+      'इतिहास दिखाओ',
+      'வரலாறு காட்டு',
+      'ಇತಿಹಾಸ ತೋರಿಸು',
+      'ചരിത്രം കാണിക്കുക',
+      'इतिहास दाखवा',
+      'ইতিহাস দেখান',
+      'ઇતિહાસ બતાવો',
     ],
     VoiceCommandType.openScientific: [
-      'scientific calculator', 'switch to scientific', 'open scientific',
-      'సైంటిఫిక్ కాలిక్యులేటర్', 'वैज्ञानिक कैलकुलेटर', 'அறிவியல் கணிப்பான்',
-      'ವೈಜ್ಞಾನಿಕ ಕ್ಯಾಲ್ಕುಲೇಟರ್', 'ശാസ്ത്രീയ കാൽക്കുലേറ്റർ',
+      'scientific calculator',
+      'switch to scientific',
+      'open scientific',
+      'సైంటిఫిక్ కాలిక్యులేటర్',
+      'वैज्ञानिक कैलकुलेटर',
+      'அறிவியல் கணிப்பான்',
+      'ವೈಜ್ಞಾನಿಕ ಕ್ಯಾಲ್ಕುಲೇಟರ್',
+      'ശാസ്ത്രീയ കാൽക്കുലേറ്റർ',
     ],
   };
 
@@ -759,22 +816,22 @@ class _Vocabulary {
   final List<String> fillers;
 
   List<String> get allWords => [
-        ...plusWords,
-        ...addWords,
-        ...minusWords,
-        ...timesWords,
-        ...divideWords,
-        ...percentWords,
-        ...percentOfWords,
-        ...sqrtWords,
-        ...squaredWords,
-        ...cubedWords,
-        ...factorialWords,
-        ...pointWords,
-        ...equalsWords,
-        ...piWords,
-        ...andWords,
-      ];
+    ...plusWords,
+    ...addWords,
+    ...minusWords,
+    ...timesWords,
+    ...divideWords,
+    ...percentWords,
+    ...percentOfWords,
+    ...sqrtWords,
+    ...squaredWords,
+    ...cubedWords,
+    ...factorialWords,
+    ...pointWords,
+    ...equalsWords,
+    ...piWords,
+    ...andWords,
+  ];
 }
 
 class _Rule {

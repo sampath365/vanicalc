@@ -10,10 +10,7 @@ import '../core/localization/app_localizations.dart';
 ///
 /// The spoken phrase can be digits, words in any supported language or a small
 /// expression such as "two thousand plus five hundred".
-Future<double?> captureSpokenNumber(
-  BuildContext context,
-  WidgetRef ref,
-) async {
+Future<double?> captureSpokenNumber(BuildContext context, WidgetRef ref) async {
   final recognizer = ref.read(speechRecognizerProvider);
   final settings = ref.read(settingsControllerProvider);
   final parser = ref.read(spokenMathParserProvider);
@@ -40,46 +37,44 @@ Future<double?> captureSpokenNumber(
   }
 
   showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (dialogContext) {
-        final theme = Theme.of(dialogContext);
-        return AlertDialog(
-          title: Row(
-            children: [
-              Icon(Icons.mic_rounded, color: theme.colorScheme.primary),
-              const SizedBox(width: 8),
-              Expanded(child: Text(dialogContext.tr('voice_listening'))),
-            ],
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ValueListenableBuilder<String>(
-                valueListenable: transcript,
-                builder: (context, value, _) => Text(
-                  value.isEmpty
-                      ? dialogContext.tr('voice_mic_hint')
-                      : value,
-                  style: theme.textTheme.bodyLarge,
-                ),
+    context: context,
+    barrierDismissible: false,
+    builder: (dialogContext) {
+      final theme = Theme.of(dialogContext);
+      return AlertDialog(
+        title: Row(
+          children: [
+            Icon(Icons.mic_rounded, color: theme.colorScheme.primary),
+            const SizedBox(width: 8),
+            Expanded(child: Text(dialogContext.tr('voice_listening'))),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ValueListenableBuilder<String>(
+              valueListenable: transcript,
+              builder: (context, value, _) => Text(
+                value.isEmpty ? dialogContext.tr('voice_mic_hint') : value,
+                style: theme.textTheme.bodyLarge,
               ),
-              const SizedBox(height: 12),
-              Text(
-                dialogContext.tr('voice_examples'),
-                style: theme.textTheme.bodySmall,
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => finish(null),
-              child: Text(dialogContext.tr('cancel')),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              dialogContext.tr('voice_examples'),
+              style: theme.textTheme.bodySmall,
             ),
           ],
-        );
-      },
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => finish(null),
+            child: Text(dialogContext.tr('cancel')),
+          ),
+        ],
+      );
+    },
   ).whenComplete(() {
     dialogOpen = false;
     finish(null);

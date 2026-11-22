@@ -23,10 +23,9 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     final records = ref.watch(historyControllerProvider);
-    final filtered = ref.read(historyControllerProvider.notifier).search(
-          _query,
-          favoritesOnly: _favoritesOnly,
-        );
+    final filtered = ref
+        .read(historyControllerProvider.notifier)
+        .search(_query, favoritesOnly: _favoritesOnly);
     final settings = ref.watch(settingsControllerProvider);
     final theme = Theme.of(context);
 
@@ -73,10 +72,7 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                     onSelected: (_) => setState(() => _favoritesOnly = true),
                   ),
                   const Spacer(),
-                  Text(
-                    '${filtered.length}',
-                    style: theme.textTheme.bodySmall,
-                  ),
+                  Text('${filtered.length}', style: theme.textTheme.bodySmall),
                 ],
               ),
             ),
@@ -116,12 +112,17 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                                 .read(historyControllerProvider.notifier)
                                 .delete(record.id);
                             if (!context.mounted) return;
-                            showAppSnack(context, context.tr('history_deleted'));
+                            showAppSnack(
+                              context,
+                              context.tr('history_deleted'),
+                            );
                           },
                           onCopy: () async {
                             await ref
                                 .read(platformServicesProvider)
-                                .copy('${record.expression} = ${record.result}');
+                                .copy(
+                                  '${record.expression} = ${record.result}',
+                                );
                             if (!context.mounted) return;
                             showAppSnack(context, context.tr('copied'));
                           },
@@ -140,14 +141,18 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
     final value = record.value ?? double.tryParse(record.result);
     final text = value == null
         ? record.result
-        : ref.read(calculationSpeakerProvider).calculationSentence(
-              record.expression,
-              value,
-              settings.effectiveTtsLanguage,
-              system: settings.numberSystem,
-            );
+        : ref
+              .read(calculationSpeakerProvider)
+              .calculationSentence(
+                record.expression,
+                value,
+                settings.effectiveTtsLanguage,
+                system: settings.numberSystem,
+              );
     try {
-      await ref.read(speechSynthesizerProvider).speak(
+      await ref
+          .read(speechSynthesizerProvider)
+          .speak(
             text,
             locale: settings.effectiveTtsLanguage.ttsLocale,
             rate: settings.speechRate,

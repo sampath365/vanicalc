@@ -17,9 +17,9 @@ void main() {
     await environment.dispose();
   });
 
-  testWidgets('number to words shows Indian lakh and crore wording',
-      (tester) async {
-
+  testWidgets('number to words shows Indian lakh and crore wording', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       wrapForTest(
         const NumberToWordsScreen(),
@@ -29,16 +29,14 @@ void main() {
     await tester.pump();
 
     expect(
-      find.text(
-        'Sixteen Lakh Thirty-Four Thousand Three Hundred Ninety-One',
-      ),
+      find.text('Sixteen Lakh Thirty-Four Thousand Three Hundred Ninety-One'),
       findsWidgets,
     );
   });
 
-  testWidgets('switching to international numbering updates the words',
-      (tester) async {
-
+  testWidgets('switching to international numbering updates the words', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       wrapForTest(
         const NumberToWordsScreen(),
@@ -54,7 +52,6 @@ void main() {
   });
 
   testWidgets('currency mode appends rupees only', (tester) async {
-
     await tester.pumpWidget(
       wrapForTest(
         const NumberToWordsScreen(initialValue: '11800'),
@@ -73,12 +70,8 @@ void main() {
   });
 
   testWidgets('language screen switches the app language', (tester) async {
-
     await tester.pumpWidget(
-      wrapForTest(
-        const LanguageScreen(),
-        overrides: environment.overrides,
-      ),
+      wrapForTest(const LanguageScreen(), overrides: environment.overrides),
     );
     await tester.pump();
 
@@ -91,12 +84,8 @@ void main() {
   });
 
   testWidgets('language screen filters by search', (tester) async {
-
     await tester.pumpWidget(
-      wrapForTest(
-        const LanguageScreen(),
-        overrides: environment.overrides,
-      ),
+      wrapForTest(const LanguageScreen(), overrides: environment.overrides),
     );
     await tester.pump();
 
@@ -107,9 +96,7 @@ void main() {
     expect(find.text('తెలుగు'), findsNothing);
   });
 
-  testWidgets('language screen shows every supported language',
-      (tester) async {
-
+  testWidgets('language screen shows every supported language', (tester) async {
     await tester.pumpWidget(
       wrapForTest(
         const LanguageScreen(),

@@ -21,13 +21,22 @@ class NumberToWordsScreen extends ConsumerStatefulWidget {
 }
 
 class _NumberToWordsScreenState extends ConsumerState<NumberToWordsScreen> {
-  late final TextEditingController _controller =
-      TextEditingController(text: widget.initialValue ?? '1634391');
+  late final TextEditingController _controller = TextEditingController(
+    text: widget.initialValue ?? '1634391',
+  );
   NumberSystem _system = NumberSystem.indian;
   bool _currency = false;
   bool _speaking = false;
 
-  static const _examples = ['100', '1000', '10000', '100000', '1000000', '10000000', '1634391'];
+  static const _examples = [
+    '100',
+    '1000',
+    '10000',
+    '100000',
+    '1000000',
+    '10000000',
+    '1634391',
+  ];
 
   @override
   void initState() {
@@ -43,7 +52,9 @@ class _NumberToWordsScreenState extends ConsumerState<NumberToWordsScreen> {
 
   String get _words {
     final settings = ref.read(settingsControllerProvider);
-    return ref.read(numberToWordsEngineProvider).fromString(
+    return ref
+        .read(numberToWordsEngineProvider)
+        .fromString(
           _controller.text.trim(),
           languageCode: settings.language.code,
           system: _system,
@@ -60,7 +71,9 @@ class _NumberToWordsScreenState extends ConsumerState<NumberToWordsScreen> {
 
   Future<void> _share(String text) async {
     if (text.isEmpty) return;
-    await ref.read(platformServicesProvider).share(text, subject: context.tr('words_title'));
+    await ref
+        .read(platformServicesProvider)
+        .share(text, subject: context.tr('words_title'));
     if (!mounted) return;
     showAppSnack(context, context.tr('shared'));
   }
@@ -70,7 +83,9 @@ class _NumberToWordsScreenState extends ConsumerState<NumberToWordsScreen> {
     final settings = ref.read(settingsControllerProvider);
     setState(() => _speaking = true);
     try {
-      await ref.read(speechSynthesizerProvider).speak(
+      await ref
+          .read(speechSynthesizerProvider)
+          .speak(
             text,
             locale: settings.effectiveTtsLanguage.ttsLocale,
             rate: settings.speechRate,
@@ -220,7 +235,10 @@ class _NumberToWordsScreenState extends ConsumerState<NumberToWordsScreen> {
                       if (hasInput)
                         Text(
                           ResultFormatter.grouped(
-                            num.tryParse(_controller.text.replaceAll(',', '')) ?? 0,
+                            num.tryParse(
+                                  _controller.text.replaceAll(',', ''),
+                                ) ??
+                                0,
                             system: _system,
                           ),
                           style: theme.textTheme.bodySmall,
@@ -231,9 +249,7 @@ class _NumberToWordsScreenState extends ConsumerState<NumberToWordsScreen> {
                   AnimatedSwitcher(
                     duration: const Duration(milliseconds: 250),
                     child: Text(
-                      words.isEmpty
-                          ? context.tr('words_empty_hint')
-                          : words,
+                      words.isEmpty ? context.tr('words_empty_hint') : words,
                       key: ValueKey('$words-$_currency-$_system'),
                       style: theme.textTheme.headlineMedium?.copyWith(
                         height: 1.4,
@@ -312,7 +328,9 @@ class _NumberToWordsScreenState extends ConsumerState<NumberToWordsScreen> {
                           ),
                           Expanded(
                             child: Text(
-                              ref.read(numberToWordsEngineProvider).convert(
+                              ref
+                                  .read(numberToWordsEngineProvider)
+                                  .convert(
                                     value,
                                     languageCode: settings.language.code,
                                     system: _system,

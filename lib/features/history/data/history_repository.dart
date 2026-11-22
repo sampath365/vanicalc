@@ -28,12 +28,14 @@ class HistoryRepository implements HistoryStore {
   @override
   List<CalculationRecord> search(String query, {bool favoritesOnly = false}) {
     final normalized = query.trim().toLowerCase();
-    return all().where((record) {
-      if (favoritesOnly && !record.favorite) return false;
-      if (normalized.isEmpty) return true;
-      return record.expression.toLowerCase().contains(normalized) ||
-          record.result.toLowerCase().contains(normalized);
-    }).toList(growable: false);
+    return all()
+        .where((record) {
+          if (favoritesOnly && !record.favorite) return false;
+          if (normalized.isEmpty) return true;
+          return record.expression.toLowerCase().contains(normalized) ||
+              record.result.toLowerCase().contains(normalized);
+        })
+        .toList(growable: false);
   }
 
   @override

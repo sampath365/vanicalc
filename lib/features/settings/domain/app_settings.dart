@@ -65,10 +65,10 @@ class AppSettings {
       onboardingSeen: onboardingSeen ?? this.onboardingSeen,
       speechRate: speechRate ?? this.speechRate,
       speechPitch: speechPitch ?? this.speechPitch,
-      speechLanguage:
-          clearSpeechLanguage ? null : (speechLanguage ?? this.speechLanguage),
-      ttsLanguage:
-          clearTtsLanguage ? null : (ttsLanguage ?? this.ttsLanguage),
+      speechLanguage: clearSpeechLanguage
+          ? null
+          : (speechLanguage ?? this.speechLanguage),
+      ttsLanguage: clearTtsLanguage ? null : (ttsLanguage ?? this.ttsLanguage),
     );
   }
 }

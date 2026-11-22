@@ -12,29 +12,79 @@ class ToolsScreen extends StatelessWidget {
     _ToolGroup(
       titleKey: 'tools_financial',
       tools: [
-        _Tool('tool_gst', Icons.receipt_long_rounded, '/gst', Color(0xFFEF7A18)),
-        _Tool('tool_discount', Icons.percent_rounded, '/discount', Color(0xFF2563EB)),
-        _Tool('tool_profit_loss', Icons.trending_up_rounded, '/profit-loss', Color(0xFF0D9488)),
-        _Tool('tool_emi', Icons.account_balance_rounded, '/emi', Color(0xFF7C3AED)),
-        _Tool('tool_simple_interest', Icons.savings_rounded, '/interest', Color(0xFFE11D48)),
+        _Tool(
+          'tool_gst',
+          Icons.receipt_long_rounded,
+          '/gst',
+          Color(0xFFEF7A18),
+        ),
+        _Tool(
+          'tool_discount',
+          Icons.percent_rounded,
+          '/discount',
+          Color(0xFF2563EB),
+        ),
+        _Tool(
+          'tool_profit_loss',
+          Icons.trending_up_rounded,
+          '/profit-loss',
+          Color(0xFF0D9488),
+        ),
+        _Tool(
+          'tool_emi',
+          Icons.account_balance_rounded,
+          '/emi',
+          Color(0xFF7C3AED),
+        ),
+        _Tool(
+          'tool_simple_interest',
+          Icons.savings_rounded,
+          '/interest',
+          Color(0xFFE11D48),
+        ),
         _Tool('tool_tip', Icons.restaurant_rounded, '/tip', Color(0xFFF59009)),
         _Tool('tool_ratio', Icons.balance_rounded, '/ratio', Color(0xFF0EA5E9)),
-        _Tool('tool_fraction', Icons.calculate_rounded, '/fraction', Color(0xFF64748B)),
+        _Tool(
+          'tool_fraction',
+          Icons.calculate_rounded,
+          '/fraction',
+          Color(0xFF64748B),
+        ),
       ],
     ),
     _ToolGroup(
       titleKey: 'tools_math',
       tools: [
-        _Tool('tool_scientific', Icons.functions_rounded, '/scientific', Color(0xFF2563EB)),
-        _Tool('tool_percentage', Icons.percent_rounded, '/percentage', Color(0xFFEF7A18)),
+        _Tool(
+          'tool_scientific',
+          Icons.functions_rounded,
+          '/scientific',
+          Color(0xFF2563EB),
+        ),
+        _Tool(
+          'tool_percentage',
+          Icons.percent_rounded,
+          '/percentage',
+          Color(0xFFEF7A18),
+        ),
         _Tool('tool_age', Icons.cake_rounded, '/age', Color(0xFF0D9488)),
-        _Tool('tool_date_diff', Icons.date_range_rounded, '/date-difference', Color(0xFF7C3AED)),
+        _Tool(
+          'tool_date_diff',
+          Icons.date_range_rounded,
+          '/date-difference',
+          Color(0xFF7C3AED),
+        ),
       ],
     ),
     _ToolGroup(
       titleKey: 'tools_unit',
       tools: [
-        _Tool('tool_converter', Icons.swap_horiz_rounded, '/converter', Color(0xFF0EA5E9)),
+        _Tool(
+          'tool_converter',
+          Icons.swap_horiz_rounded,
+          '/converter',
+          Color(0xFF0EA5E9),
+        ),
       ],
     ),
   ];

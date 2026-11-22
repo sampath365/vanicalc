@@ -2,9 +2,7 @@ import '../../../core/utils/result_formatter.dart';
 
 /// Outcome of evaluating a mathematical expression.
 class EvaluationResult {
-  const EvaluationResult.success(this.value)
-      : errorCode = null,
-        detail = null;
+  const EvaluationResult.success(this.value) : errorCode = null, detail = null;
 
   const EvaluationResult.failure(this.errorCode, {this.detail}) : value = null;
 

@@ -21,7 +21,9 @@ class HistoryController extends Notifier<List<CalculationRecord>> {
     required String languageCode,
     double? value,
   }) async {
-    final record = await ref.read(historyRepositoryProvider).add(
+    final record = await ref
+        .read(historyRepositoryProvider)
+        .add(
           expression: expression,
           result: result,
           type: type,

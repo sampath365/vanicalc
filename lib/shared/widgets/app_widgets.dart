@@ -80,8 +80,12 @@ class GradientHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final accent = Theme.of(context).extension<CalcPalette>();
-    final colors = gradient ??
-        [accent?.equalsStart ?? const Color(0xFFFF7A18), accent?.equalsEnd ?? const Color(0xFFFFA53C)];
+    final colors =
+        gradient ??
+        [
+          accent?.equalsStart ?? const Color(0xFFFF7A18),
+          accent?.equalsEnd ?? const Color(0xFFFFA53C),
+        ];
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -134,10 +138,7 @@ class GradientHeader extends StatelessWidget {
               ?trailing,
             ],
           ),
-          if (child != null) ...[
-            const SizedBox(height: 18),
-            child!,
-          ],
+          if (child != null) ...[const SizedBox(height: 18), child!],
         ],
       ),
     );
@@ -213,8 +214,10 @@ class FeatureCard extends StatelessWidget {
               const Spacer(),
               if (badge != null)
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: colors.first.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(8),
@@ -272,10 +275,7 @@ class SectionHeader extends StatelessWidget {
             child: Text(title, style: Theme.of(context).textTheme.titleLarge),
           ),
           if (actionLabel != null)
-            TextButton(
-              onPressed: onAction,
-              child: Text(actionLabel!),
-            ),
+            TextButton(onPressed: onAction, child: Text(actionLabel!)),
         ],
       ),
     );
@@ -359,8 +359,12 @@ class GradientButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = Theme.of(context).extension<CalcPalette>();
-    final gradientColors = colors ??
-        [palette?.equalsStart ?? const Color(0xFFFF7A18), palette?.equalsEnd ?? const Color(0xFFFFA53C)];
+    final gradientColors =
+        colors ??
+        [
+          palette?.equalsStart ?? const Color(0xFFFF7A18),
+          palette?.equalsEnd ?? const Color(0xFFFFA53C),
+        ];
     final child = Container(
       height: height,
       alignment: Alignment.center,
@@ -471,10 +475,7 @@ class EmptyState extends StatelessWidget {
                 style: theme.textTheme.bodySmall,
               ),
             ],
-            if (action != null) ...[
-              const SizedBox(height: 18),
-              action!,
-            ],
+            if (action != null) ...[const SizedBox(height: 18), action!],
           ],
         ),
       ),
@@ -538,11 +539,7 @@ class AppLogo extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Icon(
-                Icons.mic_rounded,
-                color: start,
-                size: size * 0.22,
-              ),
+              child: Icon(Icons.mic_rounded, color: start, size: size * 0.22),
             ),
           ),
         ],

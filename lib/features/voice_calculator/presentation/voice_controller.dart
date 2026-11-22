@@ -9,7 +9,14 @@ import '../../history/domain/calculation_record.dart';
 import '../../settings/domain/app_settings.dart';
 import '../domain/spoken_math_parser.dart';
 
-enum VoiceStatus { idle, listening, processing, needsConfirmation, result, error }
+enum VoiceStatus {
+  idle,
+  listening,
+  processing,
+  needsConfirmation,
+  result,
+  error,
+}
 
 /// State of the voice calculator screen.
 class VoiceState {
@@ -150,7 +157,9 @@ class VoiceController extends Notifier<VoiceState> {
     final language = _settings.effectiveSpeechLanguage;
     final wanted = language.speechLocale;
     try {
-      final locales = await ref.read(speechRecognizerProvider).availableLocales();
+      final locales = await ref
+          .read(speechRecognizerProvider)
+          .availableLocales();
       String normalize(String value) =>
           value.replaceAll('-', '_').toLowerCase();
       if (locales.any((locale) => normalize(locale) == normalize(wanted))) {
@@ -256,7 +265,9 @@ class VoiceController extends Notifier<VoiceState> {
       case VoiceCommandType.setLanguage:
         final language = command.language;
         if (language != null) {
-          await ref.read(settingsControllerProvider.notifier).setLanguage(language);
+          await ref
+              .read(settingsControllerProvider.notifier)
+              .setLanguage(language);
         }
         state = state.copyWith(
           status: VoiceStatus.idle,
@@ -272,9 +283,14 @@ class VoiceController extends Notifier<VoiceState> {
           );
           return;
         }
-        await ref.read(settingsControllerProvider.notifier).setTtsLanguage(language);
+        await ref
+            .read(settingsControllerProvider.notifier)
+            .setTtsLanguage(language);
         await speakCalculation(answerOnly: true, languageOverride: language);
-        state = state.copyWith(status: VoiceStatus.result, notice: 'voice_applied');
+        state = state.copyWith(
+          status: VoiceStatus.result,
+          notice: 'voice_applied',
+        );
     }
   }
 
@@ -288,7 +304,9 @@ class VoiceController extends Notifier<VoiceState> {
 
   Future<void> calculate({bool speak = true}) async {
     if (state.expression.trim().isEmpty) return;
-    final outcome = ref.read(expressionEngineProvider).evaluate(state.expression);
+    final outcome = ref
+        .read(expressionEngineProvider)
+        .evaluate(state.expression);
     if (!outcome.isSuccess) {
       state = state.copyWith(
         status: VoiceStatus.error,
@@ -305,7 +323,9 @@ class VoiceController extends Notifier<VoiceState> {
       clearError: true,
       ambiguous: false,
     );
-    await ref.read(historyControllerProvider.notifier).add(
+    await ref
+        .read(historyControllerProvider.notifier)
+        .add(
           expression: state.expression,
           result: outcome.display,
           value: outcome.value,
@@ -345,7 +365,9 @@ class VoiceController extends Notifier<VoiceState> {
   Future<void> _speak(String text, AppLanguage language) async {
     state = state.copyWith(speaking: true);
     try {
-      await ref.read(speechSynthesizerProvider).speak(
+      await ref
+          .read(speechSynthesizerProvider)
+          .speak(
             text,
             locale: language.ttsLocale,
             rate: _settings.speechRate,

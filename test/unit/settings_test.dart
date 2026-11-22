@@ -58,7 +58,9 @@ void main() {
       expect(settings.effectiveSpeechLanguage, AppLanguage.tamil);
       expect(settings.effectiveTtsLanguage, AppLanguage.tamil);
       expect(
-        container.read(sharedPreferencesProvider).getString('settings.language'),
+        container
+            .read(sharedPreferencesProvider)
+            .getString('settings.language'),
         'ta',
       );
     });

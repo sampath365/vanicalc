@@ -12,9 +12,9 @@ import '../widgets/tool_widgets.dart';
 enum _PercentMode { of, isWhat, change }
 
 Widget _invalid(BuildContext context) => Text(
-      context.tr('invalid_input'),
-      style: TextStyle(color: Theme.of(context).colorScheme.error),
-    );
+  context.tr('invalid_input'),
+  style: TextStyle(color: Theme.of(context).colorScheme.error),
+);
 
 /// Percentage calculator with three common modes.
 class PercentageScreen extends ConsumerStatefulWidget {
@@ -48,16 +48,16 @@ class _PercentageScreenState extends ConsumerState<PercentageScreen> {
   }
 
   String _labelA(BuildContext context) => switch (_mode) {
-        _PercentMode.of => context.tr('percent'),
-        _PercentMode.isWhat => context.tr('value_a'),
-        _PercentMode.change => context.tr('original_value'),
-      };
+    _PercentMode.of => context.tr('percent'),
+    _PercentMode.isWhat => context.tr('value_a'),
+    _PercentMode.change => context.tr('original_value'),
+  };
 
   String _labelB(BuildContext context) => switch (_mode) {
-        _PercentMode.of => context.tr('amount'),
-        _PercentMode.isWhat => context.tr('value_b'),
-        _PercentMode.change => context.tr('new_value'),
-      };
+    _PercentMode.of => context.tr('amount'),
+    _PercentMode.isWhat => context.tr('value_b'),
+    _PercentMode.change => context.tr('new_value'),
+  };
 
   String _format(double value) {
     final text = ResultFormatter.format(value);
@@ -70,11 +70,13 @@ class _PercentageScreenState extends ConsumerState<PercentageScreen> {
     final result = _result;
     final words = result == null
         ? ''
-        : ref.read(numberToWordsEngineProvider).fromString(
-              ResultFormatter.format(result),
-              languageCode: settings.language.code,
-              system: settings.numberSystem,
-            );
+        : ref
+              .read(numberToWordsEngineProvider)
+              .fromString(
+                ResultFormatter.format(result),
+                languageCode: settings.language.code,
+                system: settings.numberSystem,
+              );
 
     return ToolPage(
       title: context.tr('tool_percentage'),
@@ -82,12 +84,16 @@ class _PercentageScreenState extends ConsumerState<PercentageScreen> {
         SegmentedButton<_PercentMode>(
           showSelectedIcon: false,
           segments: [
-            ButtonSegment(value: _PercentMode.of, label: Text(context.tr('percent'))),
+            ButtonSegment(
+              value: _PercentMode.of,
+              label: Text(context.tr('percent')),
+            ),
             ButtonSegment(value: _PercentMode.isWhat, label: Text('a → %')),
             ButtonSegment(value: _PercentMode.change, label: Text('% Δ')),
           ],
           selected: {_mode},
-          onSelectionChanged: (selection) => setState(() => _mode = selection.first),
+          onSelectionChanged: (selection) =>
+              setState(() => _mode = selection.first),
         ),
         const SizedBox(height: 16),
         ToolField(
@@ -121,11 +127,19 @@ class _PercentageScreenState extends ConsumerState<PercentageScreen> {
         else
           ToolResultCard(
             rows: [
-              ToolRowData(context.tr('result'), _format(result), emphasized: true),
+              ToolRowData(
+                context.tr('result'),
+                _format(result),
+                emphasized: true,
+              ),
             ],
             words: words,
             onSpeak: () => speakWithSettings(context, ref, words),
-            onCopy: () => copyWithFeedback(context, ref, '${_a.text} / ${_b.text} = $_format(result)'),
+            onCopy: () => copyWithFeedback(
+              context,
+              ref,
+              '${_a.text} / ${_b.text} = $_format(result)',
+            ),
           ),
       ],
     );
@@ -192,7 +206,9 @@ class _RatioScreenState extends ConsumerState<RatioScreen> {
     final settings = ref.read(settingsControllerProvider);
     final ratio = FinancialCalculators.simplifyRatio(a, b);
     final decimal = a / b;
-    final words = ref.read(numberToWordsEngineProvider).fromString(
+    final words = ref
+        .read(numberToWordsEngineProvider)
+        .fromString(
           ResultFormatter.format(decimal),
           languageCode: settings.language.code,
           system: settings.numberSystem,
@@ -207,11 +223,8 @@ class _RatioScreenState extends ConsumerState<RatioScreen> {
       ],
       words: words,
       onSpeak: () => speakWithSettings(context, ref, words),
-      onCopy: () => copyWithFeedback(
-        context,
-        ref,
-        '${_a.text} : ${_b.text} = $ratio',
-      ),
+      onCopy: () =>
+          copyWithFeedback(context, ref, '${_a.text} : ${_b.text} = $ratio'),
     );
   }
 }
@@ -264,7 +277,10 @@ class _FractionScreenState extends ConsumerState<FractionScreen> {
             ),
           ],
         ),
-        if (invalid) _invalid(context) else _result(context, numerator, denominator),
+        if (invalid)
+          _invalid(context)
+        else
+          _result(context, numerator, denominator),
       ],
     );
   }
@@ -272,7 +288,9 @@ class _FractionScreenState extends ConsumerState<FractionScreen> {
   Widget _result(BuildContext context, int numerator, int denominator) {
     final settings = ref.read(settingsControllerProvider);
     final value = numerator / denominator;
-    final words = ref.read(numberToWordsEngineProvider).fromString(
+    final words = ref
+        .read(numberToWordsEngineProvider)
+        .fromString(
           ResultFormatter.format(value),
           languageCode: settings.language.code,
           system: settings.numberSystem,
@@ -334,7 +352,9 @@ class _AgeScreenState extends ConsumerState<AgeScreen> {
   Widget build(BuildContext context) {
     final settings = ref.watch(settingsControllerProvider);
     final result = FinancialCalculators.dateDifference(_birthDate, _asOn);
-    final words = ref.read(numberToWordsEngineProvider).convert(
+    final words = ref
+        .read(numberToWordsEngineProvider)
+        .convert(
           result.totalDays,
           languageCode: settings.language.code,
           system: settings.numberSystem,
@@ -360,8 +380,8 @@ class _AgeScreenState extends ConsumerState<AgeScreen> {
             ToolRowData(
               context.tr('age_result'),
               '${result.years} ${context.tr('years_short')} '
-                  '${result.months} ${context.tr('months_short')} '
-                  '${result.days} ${context.tr('days_short')}',
+              '${result.months} ${context.tr('months_short')} '
+              '${result.days} ${context.tr('days_short')}',
               emphasized: true,
             ),
             ToolRowData(context.tr('total_days'), '${result.totalDays}'),
@@ -421,7 +441,9 @@ class _DateDifferenceScreenState extends ConsumerState<DateDifferenceScreen> {
   Widget build(BuildContext context) {
     final settings = ref.watch(settingsControllerProvider);
     final result = FinancialCalculators.dateDifference(_from, _to);
-    final words = ref.read(numberToWordsEngineProvider).convert(
+    final words = ref
+        .read(numberToWordsEngineProvider)
+        .convert(
           result.totalDays,
           languageCode: settings.language.code,
           system: settings.numberSystem,
@@ -447,8 +469,8 @@ class _DateDifferenceScreenState extends ConsumerState<DateDifferenceScreen> {
             ToolRowData(
               context.tr('difference_result'),
               '${result.years} ${context.tr('years_short')} '
-                  '${result.months} ${context.tr('months_short')} '
-                  '${result.days} ${context.tr('days_short')}',
+              '${result.months} ${context.tr('months_short')} '
+              '${result.days} ${context.tr('days_short')}',
               emphasized: true,
             ),
             ToolRowData(context.tr('total_days'), '${result.totalDays}'),
@@ -467,7 +489,8 @@ class _DateDifferenceScreenState extends ConsumerState<DateDifferenceScreen> {
           ],
           words: words,
           onSpeak: () => speakWithSettings(context, ref, words),
-          onCopy: () => copyWithFeedback(context, ref, '${result.totalDays} days'),
+          onCopy: () =>
+              copyWithFeedback(context, ref, '${result.totalDays} days'),
         ),
       ],
     );

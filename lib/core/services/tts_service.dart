@@ -70,7 +70,8 @@ class DeviceSpeechSynthesizer implements SpeechSynthesizer {
   @override
   Future<bool> isLanguageAvailable(String locale) async {
     try {
-      return await _tts.isLanguageAvailable(locale.replaceAll('_', '-')) == true;
+      return await _tts.isLanguageAvailable(locale.replaceAll('_', '-')) ==
+          true;
     } catch (_) {
       return false;
     }

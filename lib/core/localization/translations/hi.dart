@@ -148,8 +148,7 @@ const Map<String, String> hiStrings = <String, String>{
   'language_title': 'भाषा',
   'language_subtitle': 'ऐप, वॉइस इनपुट और वाक् के लिए भाषा चुनें',
   'language_selected': 'चयनित',
-  'language_note':
-      'हर भाषा में संख्या शब्द और वाक् ऑफ़लाइन काम करते हैं। कुछ टूल लेबल अंग्रेज़ी में रहते हैं।',
+  'language_note': 'हर भाषा में संख्या शब्द और वाक् ऑफ़लाइन काम करते हैं। कुछ टूल लेबल अंग्रेज़ी में रहते हैं।',
   'language_search_hint': 'भाषाएँ खोजें',
   'language_speech_support': 'वॉइस इनपुट और वाक् समर्थित',
 
@@ -249,12 +248,14 @@ const Map<String, String> hiStrings = <String, String>{
   'converter_invalid': 'मान्य मान दर्ज करें',
 
   'onboarding_1_title': 'कुछ भी गणना करें',
-  'onboarding_1_desc': 'वैज्ञानिक फ़ंक्शन, मेमोरी और इतिहास वाला प्रीमियम कैलकुलेटर।',
+  'onboarding_1_desc':
+      'वैज्ञानिक फ़ंक्शन, मेमोरी और इतिहास वाला प्रीमियम कैलकुलेटर।',
   'onboarding_2_title': 'बस बोलिए',
   'onboarding_2_desc':
       '“पच्चीस प्लस पैंतीस” हिंदी, तेलुगु, अंग्रेज़ी सहित 10 भाषाओं में कहें।',
   'onboarding_3_title': 'संख्याएँ शब्दों में',
-  'onboarding_3_desc': 'लाख और करोड़ के साथ राशि को शब्दों में बदलें और सुनाएँ।',
+  'onboarding_3_desc':
+      'लाख और करोड़ के साथ राशि को शब्दों में बदलें और सुनाएँ।',
   'onboarding_skip': 'छोड़ें',
   'onboarding_next': 'अगला',
   'onboarding_start': 'गणना शुरू करें',

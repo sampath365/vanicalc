@@ -10,9 +10,7 @@ class PlatformServices {
   }
 
   Future<void> share(String text, {String? subject}) async {
-    await SharePlus.instance.share(
-      ShareParams(text: text, subject: subject),
-    );
+    await SharePlus.instance.share(ShareParams(text: text, subject: subject));
   }
 
   Future<void> lightHaptic() => HapticFeedback.lightImpact();

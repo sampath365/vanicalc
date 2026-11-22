@@ -7,11 +7,7 @@ import '../../../shared/widgets/app_widgets.dart';
 
 /// Standard scaffold for a calculator tool page.
 class ToolPage extends StatelessWidget {
-  const ToolPage({
-    super.key,
-    required this.title,
-    required this.children,
-  });
+  const ToolPage({super.key, required this.title, required this.children});
 
   final String title;
   final List<Widget> children;
@@ -134,15 +130,16 @@ class ToolResultCard extends StatelessWidget {
                       child: Text(
                         rows[index].value,
                         textAlign: TextAlign.right,
-                        style: (rows[index].emphasized
-                                ? theme.textTheme.titleLarge
-                                : theme.textTheme.titleMedium)
-                            ?.copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: rows[index].emphasized
-                              ? theme.colorScheme.primary
-                              : null,
-                        ),
+                        style:
+                            (rows[index].emphasized
+                                    ? theme.textTheme.titleLarge
+                                    : theme.textTheme.titleMedium)
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  color: rows[index].emphasized
+                                      ? theme.colorScheme.primary
+                                      : null,
+                                ),
                       ),
                     ),
                   ],
@@ -150,10 +147,7 @@ class ToolResultCard extends StatelessWidget {
               ],
               if (words != null && words!.isNotEmpty) ...[
                 const Divider(height: 24),
-                Text(
-                  context.tr('gst_words'),
-                  style: theme.textTheme.bodySmall,
-                ),
+                Text(context.tr('gst_words'), style: theme.textTheme.bodySmall),
                 const SizedBox(height: 4),
                 Text(
                   words!,
@@ -202,7 +196,6 @@ class ToolResultCard extends StatelessWidget {
   }
 }
 
-
 /// Speaks [text] with the user's speech settings.
 Future<void> speakWithSettings(
   BuildContext context,
@@ -212,7 +205,9 @@ Future<void> speakWithSettings(
   if (text.trim().isEmpty) return;
   final settings = ref.read(settingsControllerProvider);
   try {
-    await ref.read(speechSynthesizerProvider).speak(
+    await ref
+        .read(speechSynthesizerProvider)
+        .speak(
           text,
           locale: settings.effectiveTtsLanguage.ttsLocale,
           rate: settings.speechRate,
@@ -246,7 +241,9 @@ Future<void> saveToolHistory(
   String type = 'tool',
 }) async {
   final settings = ref.read(settingsControllerProvider);
-  await ref.read(historyControllerProvider.notifier).add(
+  await ref
+      .read(historyControllerProvider.notifier)
+      .add(
         expression: expression,
         result: result,
         value: value,

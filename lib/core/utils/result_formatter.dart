@@ -38,7 +38,10 @@ class ResultFormatter {
   }
 
   /// Groups the integer part of [value] using the selected numbering system.
-  static String grouped(num value, {NumberSystem system = NumberSystem.international}) {
+  static String grouped(
+    num value, {
+    NumberSystem system = NumberSystem.international,
+  }) {
     final text = format(value);
     if (text.contains('e') || text.contains('∞') || text == 'NaN') return text;
 

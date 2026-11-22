@@ -47,16 +47,16 @@ class SettingsController extends Notifier<AppSettings> {
       _persist(state.copyWith(speechPitch: value));
 
   Future<void> setSpeechLanguage(AppLanguage? language) => _persist(
-        language == null
-            ? state.copyWith(clearSpeechLanguage: true)
-            : state.copyWith(speechLanguage: language),
-      );
+    language == null
+        ? state.copyWith(clearSpeechLanguage: true)
+        : state.copyWith(speechLanguage: language),
+  );
 
   Future<void> setTtsLanguage(AppLanguage? language) => _persist(
-        language == null
-            ? state.copyWith(clearTtsLanguage: true)
-            : state.copyWith(ttsLanguage: language),
-      );
+    language == null
+        ? state.copyWith(clearTtsLanguage: true)
+        : state.copyWith(ttsLanguage: language),
+  );
 
   Future<void> markOnboardingSeen() =>
       _persist(state.copyWith(onboardingSeen: true));

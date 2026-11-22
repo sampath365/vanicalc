@@ -36,8 +36,9 @@ void main() {
     await tester.pump(const Duration(milliseconds: 400));
   }
 
-  testWidgets('boots through the splash screen into the dashboard',
-      (tester) async {
+  testWidgets('boots through the splash screen into the dashboard', (
+    tester,
+  ) async {
     await tester.binding.setSurfaceSize(const Size(900, 1400));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     await tester.pumpWidget(
@@ -83,9 +84,6 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 
-    expect(
-      environment.preferences.getString('settings.theme'),
-      'dark',
-    );
+    expect(environment.preferences.getString('settings.theme'), 'dark');
   });
 }

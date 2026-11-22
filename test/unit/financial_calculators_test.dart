@@ -122,14 +122,8 @@ void main() {
       );
       expect(result.monthlyEmi, closeTo(10500.93, 0.01));
       expect(result.months, 60);
-      expect(
-        result.totalPayment,
-        closeTo(result.monthlyEmi * 60, 0.01),
-      );
-      expect(
-        result.totalInterest,
-        closeTo(result.totalPayment - 500000, 0.01),
-      );
+      expect(result.totalPayment, closeTo(result.monthlyEmi * 60, 0.01));
+      expect(result.totalInterest, closeTo(result.totalPayment - 500000, 0.01));
     });
 
     test('zero interest loan splits evenly', () {
