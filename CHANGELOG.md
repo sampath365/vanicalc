@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.1.0 — 2026-11-22
+
+### Added
+- Camera scan & count: scan barcodes to tally items, set prices, see item and amount
+  totals, speak the total and save it to history.
+- Advanced maths tools: quadratic equation solver (real and complex roots), statistics
+  (mean, median, mode, spread), base converter and number tools (GCD/LCM, nPr/nCr,
+  primes and factorisation).
+- Searchable dropdowns for language and unit selection.
+- Live number words under the calculator display.
+- Speak-on-equals when auto-speak is enabled, plus a speak/stop button in the display.
+
+### Changed
+- Number-to-words result now sits directly below the input and updates as you type.
+- Speak buttons stack cleanly on narrow screens and large text.
+- Unit converter expanded to 19 categories (pressure, energy, power, angle, frequency,
+  force, torque, acceleration, density, flow, illuminance and more).
+- Removed the calculator microphone FAB that could overlap the keypad.
+
 ## 1.0.0 — 2026-11-22
 
 ### Added

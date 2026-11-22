@@ -284,4 +284,11 @@ const Map<String, String> teStrings = <String, String>{
   'monthly_emi': 'నెలవారీ EMI',
   'total_interest': 'మొత్తం వడ్డీ',
   'total_payment': 'మొత్తం చెల్లింపు',
+  'tool_scan_count': 'స్కాన్ చేసి లెక్కించండి',
+  'tools_smart': 'స్మార్ట్ సాధనాలు',
+  'scan_items_word': 'వస్తువులు',
+  'tool_quadratic': 'వర్గ సమీకరణం',
+  'tool_statistics': 'గణాంకాలు',
+  'tool_base_converter': 'బేస్ మార్పిడి',
+  'tool_number_tools': 'సంఖ్యా సాధనాలు',
 };

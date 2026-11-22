@@ -1,11 +1,11 @@
 # VaniCalc release binaries
 
-Signed **1.0.0 (1)** builds, generated with Flutter 3.50.1 and Android SDK 36.
+Signed **1.1.0 (2)** builds, generated with Flutter 3.50.1 and Android SDK 36.
 
 | File | Use |
 | --- | --- |
-| `VaniCalc-1.0.0-release.aab` | **Upload this to Google Play Console** (internal testing → production) |
-| `VaniCalc-1.0.0-release.apk` | Universal APK for direct installation/sideloading on a device |
+| `VaniCalc-1.1.0-release.aab` | **Upload this to Google Play Console** (internal testing → production) |
+| `VaniCalc-1.1.0-release.apk` | Universal APK for direct installation/sideloading on a device |
 | `SHA256SUMS.txt` | Integrity checksums |
 
 ## Verify before installing
@@ -26,15 +26,15 @@ The private key and `android/key.properties` are **not** in this repository.
 ## Manifest
 
 - Package `com.egan.vanicalc`
-- versionName `1.0.0`, versionCode `1`
+- versionName `1.1.0`, versionCode `2`
 - minSdk 24, targetSdk 36, compileSdk 36
 - ABIs in the bundle: `armeabi-v7a`, `arm64-v8a`, `x86_64`
-- Permissions: `RECORD_AUDIO`, `INTERNET`, `ACCESS_NETWORK_STATE`, `MODIFY_AUDIO_SETTINGS`
+- Permissions: `RECORD_AUDIO`, `CAMERA`, `INTERNET`, `ACCESS_NETWORK_STATE`, `MODIFY_AUDIO_SETTINGS`
 
 ## Install the APK
 
 ```bash
-adb install -r VaniCalc-1.0.0-release.apk
+adb install -r VaniCalc-1.1.0-release.apk
 ```
 
 ## Rebuild

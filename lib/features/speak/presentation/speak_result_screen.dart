@@ -192,33 +192,40 @@ class _SpeakResultScreenState extends ConsumerState<SpeakResultScreen> {
               ),
             ),
             const SizedBox(height: 16),
+            GradientButton(
+              label: context.tr('speak'),
+              icon: Icons.volume_up_rounded,
+              onPressed: sentence == null ? null : _speak,
+            ),
+            const SizedBox(height: 10),
             Row(
               children: [
-                Expanded(
-                  flex: 2,
-                  child: GradientButton(
-                    label: context.tr('speak'),
-                    icon: Icons.volume_up_rounded,
-                    onPressed: sentence == null ? null : _speak,
-                  ),
-                ),
-                const SizedBox(width: 10),
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: () async {
                       await ref.read(speechSynthesizerProvider).stop();
                     },
                     icon: const Icon(Icons.stop_rounded, size: 18),
-                    label: Text(context.tr('stop')),
+                    label: Text(
+                      context.tr('stop'),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: sentence == null ? null : _speak,
+                    icon: const Icon(Icons.replay_rounded, size: 18),
+                    label: Text(
+                      context.tr('retry'),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ),
               ],
-            ),
-            const SizedBox(height: 10),
-            OutlinedButton.icon(
-              onPressed: sentence == null ? null : _speak,
-              icon: const Icon(Icons.replay_rounded, size: 18),
-              label: Text(context.tr('retry')),
             ),
             const SizedBox(height: 18),
             SurfaceCard(

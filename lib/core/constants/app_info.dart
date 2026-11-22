@@ -4,8 +4,8 @@ class AppInfo {
 
   static const String name = 'VaniCalc';
   static const String tagline = 'Smart Voice Calculator';
-  static const String version = '1.0.0';
-  static const String buildNumber = '1';
+  static const String version = '1.1.0';
+  static const String buildNumber = '2';
   static const String versionLabel = 'v$version ($buildNumber)';
   static const String packageName = 'com.egan.vanicalc';
   static const String supportEmail = 'support@eganlabs.com';

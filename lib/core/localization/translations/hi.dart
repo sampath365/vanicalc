@@ -285,4 +285,11 @@ const Map<String, String> hiStrings = <String, String>{
   'monthly_emi': 'मासिक EMI',
   'total_interest': 'कुल ब्याज',
   'total_payment': 'कुल भुगतान',
+  'tool_scan_count': 'स्कैन करें और गिनें',
+  'tools_smart': 'स्मार्ट टूल्स',
+  'scan_items_word': 'वस्तुएँ',
+  'tool_quadratic': 'द्विघात समीकरण',
+  'tool_statistics': 'सांख्यिकी',
+  'tool_base_converter': 'आधार परिवर्तक',
+  'tool_number_tools': 'संख्या टूल्स',
 };

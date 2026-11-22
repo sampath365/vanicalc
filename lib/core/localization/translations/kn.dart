@@ -183,4 +183,11 @@ const Map<String, String> knStrings = <String, String>{
   'gst_words': 'ಮೊತ್ತ ಪದಗಳಲ್ಲಿ',
 
   'splash_tagline': 'ಸ್ಮಾರ್ಟ್ ಧ್ವನಿ ಕ್ಯಾಲ್ಕುಲೇಟರ್',
+  'tool_scan_count': 'ಸ್ಕ್ಯಾನ್ ಮಾಡಿ ಎಣಿಸಿ',
+  'tools_smart': 'ಸ್ಮಾರ್ಟ್ ಪರಿಕರಗಳು',
+  'scan_items_word': 'ವಸ್ತುಗಳು',
+  'tool_quadratic': 'ವರ್ಗ ಸಮೀಕರಣ',
+  'tool_statistics': 'ಅಂಕಿಅಂಶಗಳು',
+  'tool_base_converter': 'ಬೇಸ್ ಪರಿವರ್ತಕ',
+  'tool_number_tools': 'ಸಂಖ್ಯೆ ಪರಿಕರಗಳು',
 };

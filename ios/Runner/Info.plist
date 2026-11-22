@@ -26,6 +26,8 @@
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>VaniCalc uses the camera to scan item barcodes and count them.</string>
 		<key>NSMicrophoneUsageDescription</key>
 		<string>VaniCalc uses the microphone to hear your calculations.</string>
 		<key>NSSpeechRecognitionUsageDescription</key>

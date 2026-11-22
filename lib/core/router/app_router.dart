@@ -14,6 +14,8 @@ import '../../features/language/presentation/language_screen.dart';
 import '../../features/number_to_words/presentation/number_to_words_screen.dart';
 import '../../features/settings/presentation/settings_screen.dart';
 import '../../features/speak/presentation/speak_result_screen.dart';
+import '../../features/scanner/presentation/scan_count_screen.dart';
+import '../../features/tools/presentation/advanced_tools_screen.dart';
 import '../../features/tools/presentation/finance_tools_screen.dart';
 import '../../features/tools/presentation/math_tools_screen.dart';
 import '../../features/tools/presentation/tools_screen.dart';
@@ -132,6 +134,26 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const FractionScreen(),
       ),
       GoRoute(path: '/age', builder: (context, state) => const AgeScreen()),
+      GoRoute(
+        path: '/scan-count',
+        builder: (context, state) => const ScanCountScreen(),
+      ),
+      GoRoute(
+        path: '/quadratic',
+        builder: (context, state) => const QuadraticScreen(),
+      ),
+      GoRoute(
+        path: '/statistics',
+        builder: (context, state) => const StatisticsScreen(),
+      ),
+      GoRoute(
+        path: '/base-converter',
+        builder: (context, state) => const BaseConverterScreen(),
+      ),
+      GoRoute(
+        path: '/number-tools',
+        builder: (context, state) => const NumberToolsScreen(),
+      ),
       GoRoute(
         path: '/date-difference',
         builder: (context, state) => const DateDifferenceScreen(),

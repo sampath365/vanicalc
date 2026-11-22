@@ -184,4 +184,11 @@ const Map<String, String> taStrings = <String, String>{
   'gst_words': 'தொகை சொற்களில்',
 
   'splash_tagline': 'ஸ்மார்ட் குரல் கணிப்பான்',
+  'tool_scan_count': 'ஸ்கேன் செய்து எண்ணுங்கள்',
+  'tools_smart': 'ஸ்மார்ட் கருவிகள்',
+  'scan_items_word': 'பொருட்கள்',
+  'tool_quadratic': 'இருபடிச் சமன்பாடு',
+  'tool_statistics': 'புள்ளியியல்',
+  'tool_base_converter': 'அடிப்படை மாற்றி',
+  'tool_number_tools': 'எண் கருவிகள்',
 };

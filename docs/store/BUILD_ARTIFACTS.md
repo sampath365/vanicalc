@@ -1,11 +1,11 @@
-# Build artifacts — 1.0.0 (1)
+# Build artifacts — 1.1.0 (2)
 
 Built on 22 November 2026 with Flutter 3.50.1 / Dart 3.14.0 and Android SDK 36.
 
 | Artifact | Path | Size | SHA-256 |
 | --- | --- | --- | --- |
-| Play upload bundle | `build/app/outputs/bundle/release/app-release.aab` | 58.7 MB | `b4027cb7f796ee0042594d58491cd65a718350821846fc5d520076f66eac0bac` |
-| Universal release APK | `build/app/outputs/flutter-apk/app-release.apk` | 60.2 MB | `b50e2742a20e422495df9ec346367819af963e901e85b10eb64848eef688bf6a` |
+| Play upload bundle | `build/app/outputs/bundle/release/app-release.aab` | 68.1 MB | `5ce6b4daa7f808a08586c71711cba86e7943c56072e4d1c50a5548ed3b67f3c0` |
+| Universal release APK | `build/app/outputs/flutter-apk/app-release.apk` | 77.9 MB | `6b662ea621c7d302ed2fda3928b6871ae2618b7967a94a6d946a77725f2175ae` |
 
 The artifacts live under `build/`, which is gitignored. Rebuild them with:
 
@@ -25,9 +25,9 @@ flutter build apk --release
 ## Manifest summary
 
 - Package: `com.egan.vanicalc`
-- versionName `1.0.0`, versionCode `1`
+- versionName `1.1.0`, versionCode `2`
 - minSdk 24, targetSdk 36, compileSdk 36
 - ABIs in the bundle: `armeabi-v7a`, `arm64-v8a`, `x86_64`
-- Permissions: `RECORD_AUDIO`, `INTERNET`, `ACCESS_NETWORK_STATE`, `MODIFY_AUDIO_SETTINGS`
+- Permissions: `RECORD_AUDIO`, `CAMERA`, `INTERNET`, `ACCESS_NETWORK_STATE`, `MODIFY_AUDIO_SETTINGS`
 - Application label: `VaniCalc`
 - Queries: `RecognitionService`, `TTS_SERVICE`, `PROCESS_TEXT`

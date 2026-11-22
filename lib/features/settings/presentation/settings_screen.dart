@@ -10,6 +10,7 @@ import '../../../core/localization/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../shared/widgets/app_widgets.dart';
+import '../../../shared/widgets/searchable_dropdown.dart';
 import '../domain/app_settings.dart';
 
 /// Theme, language, speech, number and about settings.
@@ -501,41 +502,33 @@ class _LanguageDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(label, style: Theme.of(context).textTheme.bodySmall),
-        const SizedBox(height: 6),
-        Row(
-          children: [
-            Expanded(
-              child: DropdownButtonFormField<AppLanguage>(
-                key: ValueKey('lang-${label.hashCode}-${value.code}'),
-                initialValue: value,
-                isExpanded: true,
-                items: [
-                  for (final language in AppLanguage.values)
-                    DropdownMenuItem(
-                      value: language,
-                      child: Text(
-                        '${language.flag}  ${language.nativeName}',
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                    ),
-                ],
-                onChanged: (selection) {
-                  if (selection != null) onChanged(selection);
-                },
-              ),
-            ),
-            if (isOverride)
-              IconButton(
-                tooltip: context.tr('reset'),
-                onPressed: onFollowApp,
-                icon: const Icon(Icons.link_off_rounded, size: 18),
-              ),
-          ],
+        Expanded(
+          child: SearchableDropdown<AppLanguage>(
+            label: label,
+            value: value,
+            icon: Icons.translate_rounded,
+            searchHint: context.tr('language_search_hint'),
+            options: [
+              for (final language in AppLanguage.values)
+                SearchableOption(
+                  value: language,
+                  label: language.nativeName,
+                  subtitle: language.englishName,
+                  leading: language.flag,
+                ),
+            ],
+            onChanged: onChanged,
+          ),
         ),
+        if (isOverride)
+          IconButton(
+            tooltip: context.tr('reset'),
+            onPressed: onFollowApp,
+            icon: const Icon(Icons.link_off_rounded, size: 18),
+          ),
       ],
     );
   }

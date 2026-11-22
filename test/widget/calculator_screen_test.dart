@@ -155,6 +155,57 @@ void main() {
     expect(find.text('100'), findsWidgets);
   });
 
+  testWidgets('shows the result in words under the display', (tester) async {
+    await tester.pumpWidget(
+      wrapForTest(const CalculatorScreen(), overrides: environment.overrides),
+    );
+    await tester.pump();
+
+    await tapKey(tester, '7');
+    await tapKey(tester, '+');
+    await tapKey(tester, '8');
+    await tapKey(tester, '=');
+
+    final words = tester.widget<Text>(find.byKey(const Key('calc_words_text')));
+    expect(words.data, 'Fifteen');
+  });
+
+  testWidgets('auto speak reads the total after equals', (tester) async {
+    await environment.preferences.setBool('settings.auto_speak', true);
+    await tester.pumpWidget(
+      wrapForTest(const CalculatorScreen(), overrides: environment.overrides),
+    );
+    await tester.pump();
+
+    await tapKey(tester, '7');
+    await tapKey(tester, '+');
+    await tapKey(tester, '8');
+    await tapKey(tester, '=');
+    await tester.pump();
+
+    expect(environment.synthesizer.spoken, isNotEmpty);
+    expect(environment.synthesizer.spoken.last, contains('Fifteen'));
+  });
+
+  testWidgets('speak button reads the current calculation', (tester) async {
+    await tester.pumpWidget(
+      wrapForTest(const CalculatorScreen(), overrides: environment.overrides),
+    );
+    await tester.pump();
+
+    await tapKey(tester, '6');
+    await tapKey(tester, '*');
+    await tapKey(tester, '7');
+    await tapKey(tester, '=');
+    environment.synthesizer.spoken.clear();
+
+    await tester.tap(find.byKey(const Key('calc_speak_button')));
+    await tester.pump();
+
+    expect(environment.synthesizer.spoken, isNotEmpty);
+    expect(environment.synthesizer.spoken.last, contains('Forty-Two'));
+  });
+
   testWidgets('renders in Telugu', (tester) async {
     await tester.pumpWidget(
       wrapForTest(

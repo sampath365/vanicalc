@@ -12,7 +12,7 @@
 ## Short description (max 80 characters)
 
 ```
-Speak or type any sum. 10 Indian languages, offline words, GST tools.
+Speak, scan or type. 10 Indian languages, offline words, GST tools.
 ```
 
 ## Full description
@@ -39,7 +39,9 @@ MONEY & EVERYDAY TOOLS
 • GST calculator with CGST/SGST/IGST breakup and amount in words
 • Discount, profit & loss, EMI, simple and compound interest
 • Tip split, ratio, fraction, percentage, age and date difference
-• Eight-category unit converter
+• Quadratic solver, statistics, base converter, GCD/LCM, nCr/nPr and primes
+• Scan & count: barcode-scan items, tally quantities and total prices
+• 19-category unit converter with searchable units
 
 PREMIUM, CALM DESIGN
 Light, dark or system theme, five accent colours, large rounded keys, smooth animations and a
@@ -67,15 +69,17 @@ VaniCalc works offline for calculations, number words and history.
 - Data types: none collected. History and preferences are stored locally only.
 - Microphone: used for speech recognition; audio is processed by the device speech service, not
   collected by the app.
+- Camera: used only for optional barcode scanning; frames are processed on-device by ML Kit and
+  are not collected or shared by the app.
 
 ## Content rating
 
 Everyone / PEGI 3. No ads, no in-app purchases, no user-generated content.
 
-## Release notes (1.0.0)
+## Release notes (1.1.0)
 
 ```
-First release: standard and scientific calculator, voice calculator in 10 Indian languages,
-offline number-to-words with Indian and international grouping, text-to-speech, history,
-GST and financial tools, unit converter, light and dark themes.
+New: camera scan & count for barcodes, advanced maths tools (quadratic, statistics, base
+converter, GCD/LCM, nCr/nPr, primes), searchable language and unit pickers, live number
+words under the calculator, speak-on-equals, and a 19-category unit converter.
 ```

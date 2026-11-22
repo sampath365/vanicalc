@@ -6,6 +6,7 @@ import '../../../core/localization/app_localizations.dart';
 import '../../../core/utils/result_formatter.dart';
 import '../../../shared/voice_input.dart';
 import '../../../shared/widgets/app_widgets.dart';
+import '../../../shared/widgets/searchable_dropdown.dart';
 import '../../history/domain/calculation_record.dart';
 import '../domain/unit_converter.dart';
 
@@ -279,24 +280,19 @@ class _UnitDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<UnitOption>(
-      initialValue: value,
-      isExpanded: true,
-      decoration: InputDecoration(labelText: label),
-      items: [
+    return SearchableDropdown<UnitOption>(
+      label: label,
+      value: value,
+      searchHint: context.tr('search'),
+      options: [
         for (final unit in units)
-          DropdownMenuItem(
+          SearchableOption(
             value: unit,
-            child: Text(
-              '${unit.name} (${unit.symbol})',
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontSize: 13),
-            ),
+            label: unit.name,
+            subtitle: unit.symbol,
           ),
       ],
-      onChanged: (unit) {
-        if (unit != null) onChanged(unit);
-      },
+      onChanged: onChanged,
     );
   }
 }

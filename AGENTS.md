@@ -10,7 +10,7 @@ Flutter 3.50 / Dart 3.14, Material 3 via `package:material_ui` and `package:cupe
 ```bash
 flutter pub get
 flutter analyze                  # must stay at 0 issues
-flutter test                     # 242 tests
+flutter test                     # 272 tests
 flutter run
 flutter build appbundle --release
 dart run flutter_launcher_icons
@@ -26,8 +26,9 @@ dart run flutter_native_splash:create
   `lib/core/localization/translations/en.dart`. A test fails if a literal key is missing.
 - Errors carry translation keys (see `CalcError`, `SpeechException`), not English text.
 - Use `withValues(alpha: …)` instead of deprecated `withOpacity`.
-- Keep the three engines independent: `ExpressionEngine`, `NumberToWordsEngine`,
-  `SpokenMathParser`. Add tests with every behavioural change.
+- Keep the engines independent: `ExpressionEngine`, `NumberToWordsEngine`,
+  `SpokenMathParser`, `AdvancedMath`, `ScanCounter`. Add tests with every behavioural change.
+- Camera scanning uses `mobile_scanner`; never instantiate it in widget tests (platform view).
 
 ## Secrets
 

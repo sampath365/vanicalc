@@ -5,6 +5,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../../app_providers.dart';
 import '../../../core/localization/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/utils/result_formatter.dart';
 import '../../../shared/widgets/app_widgets.dart';
 import '../../history/domain/calculation_record.dart';
 import '../presentation/calculator_controller.dart';
@@ -27,6 +28,8 @@ class CalculatorScreen extends ConsumerStatefulWidget {
 }
 
 class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
+  bool _speaking = false;
+
   @override
   void initState() {
     super.initState();
@@ -65,6 +68,50 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
       }
     }
     ref.read(calculatorControllerProvider.notifier).press(key);
+    if (key == '=') {
+      final state = ref.read(calculatorControllerProvider);
+      if (settings.autoSpeak && state.value != null) {
+        _speak();
+      }
+    }
+  }
+
+  Future<void> _speak({bool answerOnly = false}) async {
+    final state = ref.read(calculatorControllerProvider);
+    final value = state.value ?? double.tryParse(state.preview);
+    if (value == null || state.expression.trim().isEmpty) return;
+    final settings = ref.read(settingsControllerProvider);
+    final speaker = ref.read(calculationSpeakerProvider);
+    final language = settings.effectiveTtsLanguage;
+    final text = answerOnly
+        ? speaker.resultWords(value, language, system: settings.numberSystem)
+        : speaker.calculationSentence(
+            state.expression,
+            value,
+            language,
+            system: settings.numberSystem,
+          );
+    setState(() => _speaking = true);
+    try {
+      await ref
+          .read(speechSynthesizerProvider)
+          .speak(
+            text,
+            locale: language.ttsLocale,
+            rate: settings.speechRate,
+            pitch: settings.speechPitch,
+          );
+    } catch (_) {
+      if (!mounted) return;
+      showAppSnack(context, context.tr('voice_unavailable'), error: true);
+    } finally {
+      if (mounted) setState(() => _speaking = false);
+    }
+  }
+
+  Future<void> _stopSpeaking() async {
+    await ref.read(speechSynthesizerProvider).stop();
+    if (mounted) setState(() => _speaking = false);
   }
 
   Future<void> _copy() async {
@@ -79,8 +126,18 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(calculatorControllerProvider);
-    final palette = Theme.of(context).extension<CalcPalette>()!;
+    final settings = ref.watch(settingsControllerProvider);
     final isWide = MediaQuery.sizeOf(context).width >= 700;
+    final wordsValue = state.value ?? double.tryParse(state.preview);
+    final words = wordsValue == null
+        ? ''
+        : ref
+              .read(numberToWordsEngineProvider)
+              .fromString(
+                ResultFormatter.format(wordsValue),
+                languageCode: settings.language.code,
+                system: settings.numberSystem,
+              );
 
     final keypad = CalculatorKeypad(
       scientific: widget.scientific,
@@ -140,6 +197,10 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
                 children: [
                   _DisplayCard(
                     state: state,
+                    words: words,
+                    speaking: _speaking,
+                    onSpeak: _speak,
+                    onStopSpeaking: _stopSpeaking,
                     memoryLabel: state.memorySet
                         ? context.tr('calc_memory_set')
                         : context.tr('calc_memory_empty'),
@@ -170,14 +231,6 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
           ),
         ),
       ),
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => context.push('/voice'),
-        backgroundColor: palette.equalsStart,
-        foregroundColor: Colors.white,
-        elevation: 2,
-        child: const Icon(Icons.mic_rounded),
-      ),
     );
   }
 }
@@ -185,11 +238,19 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
 class _DisplayCard extends StatelessWidget {
   const _DisplayCard({
     required this.state,
+    required this.words,
+    required this.speaking,
+    required this.onSpeak,
+    required this.onStopSpeaking,
     required this.memoryLabel,
     required this.onMemoryKey,
   });
 
   final CalculatorState state;
+  final String words;
+  final bool speaking;
+  final VoidCallback onSpeak;
+  final VoidCallback onStopSpeaking;
   final String memoryLabel;
   final ValueChanged<String> onMemoryKey;
 
@@ -204,10 +265,11 @@ class _DisplayCard extends StatelessWidget {
         ? state.result
         : (state.preview.isNotEmpty ? state.preview : '0');
     final isPreview = state.result.isEmpty && state.preview.isNotEmpty;
+    final showWords = words.isNotEmpty && errorText == null;
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(18, 12, 18, 16),
+      padding: const EdgeInsets.fromLTRB(18, 10, 10, 14),
       decoration: BoxDecoration(
         color: palette.displayBackground,
         borderRadius: BorderRadius.circular(26),
@@ -223,15 +285,37 @@ class _DisplayCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          MemoryBar(
-            memorySet: state.memorySet,
-            memory: state.memory,
-            memoryLabel: memoryLabel,
-            onKey: onMemoryKey,
+          Row(
+            children: [
+              Expanded(
+                child: MemoryBar(
+                  memorySet: state.memorySet,
+                  memory: state.memory,
+                  memoryLabel: memoryLabel,
+                  onKey: onMemoryKey,
+                ),
+              ),
+              IconButton(
+                key: const Key('calc_speak_button'),
+                tooltip: speaking
+                    ? context.tr('stop')
+                    : context.tr('voice_speak_result'),
+                visualDensity: VisualDensity.compact,
+                onPressed: speaking ? onStopSpeaking : onSpeak,
+                icon: Icon(
+                  speaking
+                      ? Icons.stop_circle_outlined
+                      : Icons.volume_up_rounded,
+                  size: 21,
+                  color: theme.colorScheme.primary,
+                ),
+              ),
+              const SizedBox(width: 2),
+            ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 4),
           SizedBox(
-            height: 26,
+            height: 24,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               reverse: true,
@@ -249,9 +333,9 @@ class _DisplayCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 4),
           SizedBox(
-            height: 64,
+            height: 58,
             child: Align(
               alignment: Alignment.centerRight,
               child: AnimatedSwitcher(
@@ -288,6 +372,21 @@ class _DisplayCard extends StatelessWidget {
               ),
             ),
           ),
+          if (showWords)
+            Padding(
+              padding: const EdgeInsets.only(top: 2, right: 8),
+              child: Text(
+                words,
+                key: const Key('calc_words_text'),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.right,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  fontSize: 11.5,
+                  height: 1.3,
+                ),
+              ),
+            ),
         ],
       ),
     );

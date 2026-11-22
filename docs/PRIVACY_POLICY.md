@@ -23,6 +23,12 @@ speech service on Android or Apple's speech framework on iOS). That processing i
 privacy policy of that provider. VaniCalc itself does not upload, store or transmit your audio or
 transcripts. Recognition results are converted into a maths expression locally.
 
+## Camera and barcode scanning
+
+The scan & count tool uses the camera only while that screen is open. Barcode frames are
+processed on-device by Google ML Kit and are not stored or transmitted by VaniCalc. Camera
+access is optional; items can always be entered manually.
+
 ## Text-to-speech
 
 Results are read aloud using the text-to-speech engine installed on your device. The text sent to
@@ -33,6 +39,7 @@ the engine is generated locally from your calculation.
 | Permission | Why it is used |
 | --- | --- |
 | Microphone (`RECORD_AUDIO`) | Voice calculations |
+| Camera (`CAMERA`) | Optional barcode scanning for the scan & count tool; frames are processed on-device by ML Kit and are never uploaded by VaniCalc |
 | Internet / network state | Only used by the platform speech recogniser when it needs online recognition; the app itself makes no network calls |
 | Modify audio settings | Audio focus while speaking |
 

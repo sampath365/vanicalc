@@ -471,22 +471,26 @@ class _ResultCard extends ConsumerWidget {
           const SizedBox(height: 4),
           Text(state.expression, style: theme.textTheme.bodySmall),
           const SizedBox(height: 14),
-          Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: () =>
-                      controller.speakCalculation(answerOnly: true),
-                  icon: const Icon(Icons.record_voice_over_rounded, size: 18),
-                  label: Text(context.tr('voice_speak_answer')),
+              OutlinedButton.icon(
+                onPressed: () => controller.speakCalculation(answerOnly: true),
+                icon: const Icon(Icons.record_voice_over_rounded, size: 18),
+                label: Text(
+                  context.tr('voice_speak_answer'),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: () => controller.speakCalculation(),
-                  icon: const Icon(Icons.subject_rounded, size: 18),
-                  label: Text(context.tr('voice_speak_result')),
+              const SizedBox(height: 8),
+              OutlinedButton.icon(
+                onPressed: () => controller.speakCalculation(),
+                icon: const Icon(Icons.subject_rounded, size: 18),
+                label: Text(
+                  context.tr('voice_speak_result'),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],

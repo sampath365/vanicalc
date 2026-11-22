@@ -100,12 +100,22 @@ class _NumberToWordsScreenState extends ConsumerState<NumberToWordsScreen> {
     }
   }
 
+  Future<void> _stop() async {
+    await ref.read(speechSynthesizerProvider).stop();
+    if (mounted) setState(() => _speaking = false);
+  }
+
   @override
   Widget build(BuildContext context) {
     final settings = ref.watch(settingsControllerProvider);
     final theme = Theme.of(context);
     final words = _words;
-    final hasInput = _controller.text.trim().isNotEmpty;
+    final input = _controller.text.trim();
+    final hasInput = input.isNotEmpty;
+    final grouped = ResultFormatter.grouped(
+      num.tryParse(input.replaceAll(',', '')) ?? 0,
+      system: _system,
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -129,7 +139,7 @@ class _NumberToWordsScreenState extends ConsumerState<NumberToWordsScreen> {
                 color: theme.textTheme.bodySmall?.color,
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 14),
             TextField(
               controller: _controller,
               keyboardType: const TextInputType.numberWithOptions(
@@ -150,6 +160,21 @@ class _NumberToWordsScreenState extends ConsumerState<NumberToWordsScreen> {
                 ),
               ),
             ),
+            const SizedBox(height: 12),
+            _WordsCard(
+              words: words,
+              grouped: grouped,
+              hasInput: hasInput,
+              speaking: _speaking,
+              languageName: settings.effectiveTtsLanguage.nativeName,
+              system: _system,
+              currency: _currency,
+              onSystemChanged: (system) => setState(() => _system = system),
+              onCurrencyChanged: (value) => setState(() => _currency = value),
+              onCopy: () => _copy(words),
+              onShare: () => _share(words),
+              onSpeak: _speaking ? _stop : () => _speak(words),
+            ),
             const SizedBox(height: 14),
             Wrap(
               spacing: 8,
@@ -166,143 +191,6 @@ class _NumberToWordsScreenState extends ConsumerState<NumberToWordsScreen> {
               ],
             ),
             const SizedBox(height: 18),
-            Row(
-              children: [
-                Expanded(
-                  child: SegmentedButton<NumberSystem>(
-                    segments: [
-                      ButtonSegment(
-                        value: NumberSystem.indian,
-                        label: Text(context.tr('words_indian')),
-                      ),
-                      ButtonSegment(
-                        value: NumberSystem.international,
-                        label: Text(context.tr('words_international')),
-                      ),
-                    ],
-                    selected: {_system},
-                    onSelectionChanged: (selection) {
-                      setState(() => _system = selection.first);
-                    },
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                Switch(
-                  value: _currency,
-                  onChanged: (value) => setState(() => _currency = value),
-                ),
-                const SizedBox(width: 4),
-                Text(context.tr('words_currency_mode')),
-                const Spacer(),
-                Text(
-                  settings.language.nativeName,
-                  style: theme.textTheme.bodySmall,
-                ),
-              ],
-            ),
-            const SizedBox(height: 14),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    theme.colorScheme.primary.withValues(alpha: 0.1),
-                    theme.colorScheme.primary.withValues(alpha: 0.03),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(
-                  color: theme.colorScheme.primary.withValues(alpha: 0.18),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        context.tr('words_result_label'),
-                        style: theme.textTheme.titleSmall,
-                      ),
-                      const Spacer(),
-                      if (hasInput)
-                        Text(
-                          ResultFormatter.grouped(
-                            num.tryParse(
-                                  _controller.text.replaceAll(',', ''),
-                                ) ??
-                                0,
-                            system: _system,
-                          ),
-                          style: theme.textTheme.bodySmall,
-                        ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 250),
-                    child: Text(
-                      words.isEmpty ? context.tr('words_empty_hint') : words,
-                      key: ValueKey('$words-$_currency-$_system'),
-                      style: theme.textTheme.headlineMedium?.copyWith(
-                        height: 1.4,
-                        color: words.isEmpty
-                            ? theme.textTheme.bodySmall?.color
-                            : theme.colorScheme.onSurface,
-                      ),
-                    ),
-                  ),
-                  if (hasInput && words.isEmpty) ...[
-                    const SizedBox(height: 8),
-                    Text(
-                      context.tr('words_invalid'),
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.error,
-                      ),
-                    ),
-                  ],
-                  const SizedBox(height: 18),
-                  Row(
-                    children: [
-                      _ActionIcon(
-                        icon: Icons.copy_rounded,
-                        label: context.tr('copy'),
-                        onTap: () => _copy(words),
-                      ),
-                      const SizedBox(width: 8),
-                      _ActionIcon(
-                        icon: Icons.share_rounded,
-                        label: context.tr('share'),
-                        onTap: () => _share(words),
-                      ),
-                      const SizedBox(width: 8),
-                      _ActionIcon(
-                        icon: _speaking
-                            ? Icons.stop_circle_outlined
-                            : Icons.volume_up_rounded,
-                        label: context.tr('speak'),
-                        onTap: () {
-                          if (_speaking) {
-                            ref.read(speechSynthesizerProvider).stop();
-                            setState(() => _speaking = false);
-                          } else {
-                            _speak(words);
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 18),
             SurfaceCard(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -316,9 +204,10 @@ class _NumberToWordsScreenState extends ConsumerState<NumberToWordsScreen> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: 90,
+                            width: 92,
                             child: Text(
                               ResultFormatter.grouped(value, system: _system),
                               style: theme.textTheme.bodyMedium?.copyWith(
@@ -351,8 +240,181 @@ class _NumberToWordsScreenState extends ConsumerState<NumberToWordsScreen> {
   }
 }
 
-class _ActionIcon extends StatelessWidget {
-  const _ActionIcon({
+class _WordsCard extends StatelessWidget {
+  const _WordsCard({
+    required this.words,
+    required this.grouped,
+    required this.hasInput,
+    required this.speaking,
+    required this.languageName,
+    required this.system,
+    required this.currency,
+    required this.onSystemChanged,
+    required this.onCurrencyChanged,
+    required this.onCopy,
+    required this.onShare,
+    required this.onSpeak,
+  });
+
+  final String words;
+  final String grouped;
+  final bool hasInput;
+  final bool speaking;
+  final String languageName;
+  final NumberSystem system;
+  final bool currency;
+  final ValueChanged<NumberSystem> onSystemChanged;
+  final ValueChanged<bool> onCurrencyChanged;
+  final VoidCallback onCopy;
+  final VoidCallback onShare;
+  final VoidCallback onSpeak;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            theme.colorScheme.primary.withValues(alpha: 0.1),
+            theme.colorScheme.primary.withValues(alpha: 0.03),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(
+          color: theme.colorScheme.primary.withValues(alpha: 0.18),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  context.tr('words_result_label'),
+                  style: theme.textTheme.titleSmall,
+                ),
+              ),
+              if (hasInput)
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.surface.withValues(alpha: 0.75),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(grouped, style: theme.textTheme.bodySmall),
+                ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 250),
+            child: Text(
+              words.isEmpty ? context.tr('words_empty_hint') : words,
+              key: ValueKey('$words-$currency-$system'),
+              style: theme.textTheme.headlineMedium?.copyWith(
+                height: 1.4,
+                color: words.isEmpty
+                    ? theme.textTheme.bodySmall?.color
+                    : theme.colorScheme.onSurface,
+              ),
+            ),
+          ),
+          if (hasInput && words.isEmpty) ...[
+            const SizedBox(height: 8),
+            Text(
+              context.tr('words_invalid'),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.error,
+              ),
+            ),
+          ],
+          const SizedBox(height: 14),
+          Row(
+            children: [
+              Expanded(
+                child: SegmentedButton<NumberSystem>(
+                  showSelectedIcon: false,
+                  style: const ButtonStyle(
+                    visualDensity: VisualDensity.compact,
+                  ),
+                  segments: [
+                    ButtonSegment(
+                      value: NumberSystem.indian,
+                      label: Text(context.tr('words_indian')),
+                    ),
+                    ButtonSegment(
+                      value: NumberSystem.international,
+                      label: Text(context.tr('words_international')),
+                    ),
+                  ],
+                  selected: {system},
+                  onSelectionChanged: (selection) =>
+                      onSystemChanged(selection.first),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Row(
+            children: [
+              Switch(value: currency, onChanged: onCurrencyChanged),
+              const SizedBox(width: 4),
+              Expanded(
+                child: Text(
+                  context.tr('words_currency_mode'),
+                  style: theme.textTheme.bodyMedium,
+                ),
+              ),
+              Text(languageName, style: theme.textTheme.bodySmall),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Expanded(
+                child: _ActionTile(
+                  icon: Icons.copy_rounded,
+                  label: context.tr('copy'),
+                  onTap: onCopy,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _ActionTile(
+                  icon: Icons.share_rounded,
+                  label: context.tr('share'),
+                  onTap: onShare,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _ActionTile(
+                  icon: speaking
+                      ? Icons.stop_circle_outlined
+                      : Icons.volume_up_rounded,
+                  label: context.tr('speak'),
+                  onTap: onSpeak,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ActionTile extends StatelessWidget {
+  const _ActionTile({
     required this.icon,
     required this.label,
     required this.onTap,
@@ -365,24 +427,25 @@ class _ActionIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Expanded(
-      child: InkWell(
-        borderRadius: BorderRadius.circular(14),
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          decoration: BoxDecoration(
-            color: theme.colorScheme.surface.withValues(alpha: 0.7),
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: theme.dividerColor),
-          ),
-          child: Column(
-            children: [
-              Icon(icon, size: 20, color: theme.colorScheme.primary),
-              const SizedBox(height: 4),
-              Text(label, style: theme.textTheme.bodySmall),
-            ],
-          ),
+    return InkWell(
+      borderRadius: BorderRadius.circular(14),
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surface.withValues(alpha: 0.7),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: theme.dividerColor),
+        ),
+        child: Column(
+          children: [
+            Icon(icon, size: 20, color: theme.colorScheme.primary),
+            const SizedBox(height: 4),
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(label, maxLines: 1, style: theme.textTheme.bodySmall),
+            ),
+          ],
         ),
       ),
     );

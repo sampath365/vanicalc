@@ -3,8 +3,8 @@
 ## Before building
 
 - [ ] `flutter analyze` reports no issues
-- [ ] `flutter test` is green (237 tests)
-- [ ] Version bumped in `pubspec.yaml` (`version: 1.0.0+1`)
+- [ ] `flutter test` is green (272 tests)
+- [ ] Version bumped in `pubspec.yaml` (`version: 1.1.0+2`)
 - [ ] `android/key.properties` and `android/app/upload-keystore.jks` present (never committed)
 - [ ] Privacy policy published at the URL in `docs/STORE_LISTING.md`
 - [ ] Store listing, screenshots and feature graphic uploaded

@@ -10,6 +10,17 @@ class ToolsScreen extends StatelessWidget {
 
   static const List<_ToolGroup> _groups = [
     _ToolGroup(
+      titleKey: 'tools_smart',
+      tools: [
+        _Tool(
+          'tool_scan_count',
+          Icons.qr_code_scanner_rounded,
+          '/scan-count',
+          Color(0xFF0F766E),
+        ),
+      ],
+    ),
+    _ToolGroup(
       titleKey: 'tools_financial',
       tools: [
         _Tool(
@@ -68,6 +79,30 @@ class ToolsScreen extends StatelessWidget {
           Color(0xFFEF7A18),
         ),
         _Tool('tool_age', Icons.cake_rounded, '/age', Color(0xFF0D9488)),
+        _Tool(
+          'tool_quadratic',
+          Icons.timeline_rounded,
+          '/quadratic',
+          Color(0xFF0F766E),
+        ),
+        _Tool(
+          'tool_statistics',
+          Icons.bar_chart_rounded,
+          '/statistics',
+          Color(0xFF2563EB),
+        ),
+        _Tool(
+          'tool_base_converter',
+          Icons.code_rounded,
+          '/base-converter',
+          Color(0xFF7C3AED),
+        ),
+        _Tool(
+          'tool_number_tools',
+          Icons.tag_rounded,
+          '/number-tools',
+          Color(0xFFE11D48),
+        ),
         _Tool(
           'tool_date_diff',
           Icons.date_range_rounded,
