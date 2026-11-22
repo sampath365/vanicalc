@@ -10,7 +10,7 @@ Flutter 3.50 / Dart 3.14, Material 3 via `package:material_ui` and `package:cupe
 ```bash
 flutter pub get
 flutter analyze                  # must stay at 0 issues
-flutter test                     # 238 tests
+flutter test                     # 242 tests
 flutter run
 flutter build appbundle --release
 dart run flutter_launcher_icons

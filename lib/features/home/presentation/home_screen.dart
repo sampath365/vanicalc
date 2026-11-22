@@ -105,9 +105,9 @@ class HomeScreen extends ConsumerWidget {
                 IconButton(
                   tooltip: context.tr('settings_theme'),
                   onPressed: () {
-                    final next = settings.themeMode == AppThemeMode.light
-                        ? AppThemeMode.dark
-                        : AppThemeMode.light;
+                    final next = settings.themeMode == AppThemeMode.dark
+                        ? AppThemeMode.light
+                        : AppThemeMode.dark;
                     ref
                         .read(settingsControllerProvider.notifier)
                         .setThemeMode(next);
