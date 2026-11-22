@@ -19,6 +19,14 @@
 
 ---
 
+## Download
+
+- [VaniCalc 1.0.0 — Play upload bundle (AAB)](deploy/VaniCalc-1.0.0-release.aab)
+- [VaniCalc 1.0.0 — universal APK](deploy/VaniCalc-1.0.0-release.apk)
+- [SHA-256 checksums](deploy/SHA256SUMS.txt)
+
+The binaries are signed with the project upload key; see [`deploy/README.md`](deploy/README.md).
+
 ## Why VaniCalc
 
 Most calculator apps are either a plain keypad or a thin wrapper around a web view.
