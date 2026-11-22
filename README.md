@@ -13,7 +13,7 @@
   <img alt="Flutter" src="https://img.shields.io/badge/Flutter-3.50-02569B?logo=flutter&logoColor=white" />
   <img alt="Dart" src="https://img.shields.io/badge/Dart-3.14-0175C2?logo=dart&logoColor=white" />
   <img alt="Platforms" src="https://img.shields.io/badge/Android%20%7C%20iOS-ready-FF7A18" />
-  <img alt="Tests" src="https://img.shields.io/badge/tests-237%20passing-12B76A" />
+  <img alt="Tests" src="https://img.shields.io/badge/tests-238%20passing-12B76A" />
   <img alt="License" src="https://img.shields.io/badge/license-MIT-101828" />
 </p>
 
@@ -130,7 +130,7 @@ dart run flutter_native_splash:create
 
 ```bash
 flutter analyze     # 0 issues
-flutter test        # 237 tests
+flutter test        # 238 tests
 ```
 
 ## Architecture
@@ -172,7 +172,7 @@ lib/
 
 ## Testing
 
-237 tests cover:
+238 tests cover:
 
 - Every calculator operation, precedence, implicit multiplication, percentages, functions
 - Divide-by-zero, domain, factorial, overflow and bracket errors

@@ -126,6 +126,9 @@ abstract class NumberWordsLanguage {
     if (currency) {
       if (fractionText.length > 2) {
         fractionText = fractionText.substring(0, 2);
+      } else if (fractionText.length == 1) {
+        // ₹12.5 means fifty paise, not five.
+        fractionText = '${fractionText}0';
       }
     }
     if (fractionText.length > 6) {

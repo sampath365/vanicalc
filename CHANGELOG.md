@@ -16,4 +16,4 @@
 - GST, discount, profit/loss, EMI, simple/compound interest, tip, ratio, fraction,
   percentage, age, date difference and unit converter tools.
 - Premium light/dark themes, five accents, onboarding, splash, language picker and settings.
-- 237 unit and widget tests; zero analyzer issues.
+- 238 unit and widget tests; zero analyzer issues.

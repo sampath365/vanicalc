@@ -90,6 +90,10 @@ void main() {
     test('paise are included', () {
       expect(currency(1234.56), contains('Paise'));
     });
+    test('single decimal digit means tens of paise', () {
+      expect(currency(12.5), contains('Fifty Paise'));
+    });
+
     test('telugu currency', () {
       expect(currency(10000, language: 'te'), contains('రూపాయలు'));
     });

@@ -502,6 +502,7 @@ class _LanguageDropdown extends StatelessWidget {
           children: [
             Expanded(
               child: DropdownButtonFormField<AppLanguage>(
+                key: ValueKey('lang-${label.hashCode}-${value.code}'),
                 initialValue: value,
                 isExpanded: true,
                 items: [
