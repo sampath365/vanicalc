@@ -121,7 +121,7 @@ class _VoiceCalculatorScreenState extends ConsumerState<VoiceCalculatorScreen>
                 color: theme.textTheme.bodySmall?.color,
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
             Center(
               child: _MicOrb(
                 pulse: _pulse,
@@ -157,9 +157,9 @@ class _VoiceCalculatorScreenState extends ConsumerState<VoiceCalculatorScreen>
               ),
             ),
             if (state.transcript.isNotEmpty) ...[
-              const SizedBox(height: 16),
+              const SizedBox(height: 12),
               SurfaceCard(
-                padding: const EdgeInsets.all(14),
+                padding: const EdgeInsets.all(12),
                 child: Row(
                   children: [
                     Icon(
@@ -199,7 +199,7 @@ class _VoiceCalculatorScreenState extends ConsumerState<VoiceCalculatorScreen>
                 text: noticeText,
               ),
             ],
-            const SizedBox(height: 18),
+            const SizedBox(height: 12),
             SurfaceCard(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -228,7 +228,7 @@ class _VoiceCalculatorScreenState extends ConsumerState<VoiceCalculatorScreen>
                     context.tr('voice_edit_hint'),
                     style: theme.textTheme.bodySmall,
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
                       Expanded(
@@ -281,7 +281,7 @@ class _VoiceCalculatorScreenState extends ConsumerState<VoiceCalculatorScreen>
                   ),
               ],
             ),
-            const SizedBox(height: 18),
+            const SizedBox(height: 12),
             SurfaceCard(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -353,8 +353,8 @@ class _MicOrb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 200,
-      height: 200,
+      width: 168,
+      height: 168,
       child: AnimatedBuilder(
         animation: pulse,
         builder: (context, child) {
@@ -373,8 +373,8 @@ class _MicOrb extends StatelessWidget {
                 onTap: onTap,
                 scale: 0.94,
                 child: Container(
-                  width: 116,
-                  height: 116,
+                  width: 100,
+                  height: 100,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(

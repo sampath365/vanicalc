@@ -1,2 +1,2 @@
-8b84bc2e5d28da46ac33d232d48a87e706b96bb4e4621dfb47413b79bed4e891  VaniCalc-1.1.0-release.aab
-5c4e308388ddb8d23281669e0e3b230c413a69dcc7679c43243b40dba9af65bc  VaniCalc-1.1.0-release.apk
+b3e4d911a1f48314fcef21345f697fd99e4457a84ade655d88914d1e5bc9b005  VaniCalc-1.1.0-release.aab
+271816a55b34b76d514c569df4261f4452120e8da476dbb218b4afdcd9dddfae  VaniCalc-1.1.0-release.apk

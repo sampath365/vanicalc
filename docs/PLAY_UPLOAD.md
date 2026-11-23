@@ -2,7 +2,7 @@
 
 **File to upload:** `deploy/VaniCalc-1.1.0-release.aab`
 **Package:** `com.egan.vanicalc` · **Version:** 1.1.0 (code 2)
-**SHA-256:** `5ce6b4daa7f808a08586c71711cba86e7943c56072e4d1c50a5548ed3b67f3c0`
+**SHA-256:** `b3e4d911a1f48314fcef21345f697fd99e4457a84ade655d88914d1e5bc9b005`
 
 Download:
 - https://github.com/sampath365/vanicalc/raw/main/deploy/VaniCalc-1.1.0-release.aab
@@ -12,7 +12,7 @@ Verify before uploading:
 
 ```bash
 sha256sum VaniCalc-1.1.0-release.aab
-# must print 5ce6b4da...b67f3c0
+# must print b3e4d911...c9b005
 ```
 
 ## 1. Create the app (one time)

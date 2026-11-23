@@ -108,7 +108,7 @@ void main() {
 
   testWidgets('03 voice', (tester) async {
     debugDisableShadows = false;
-    await configure(tester, const Size(1170, 2800));
+    await configure(tester);
     await tester.pumpWidget(
       wrapForTest(
         const VoiceCalculatorScreen(),
@@ -123,6 +123,7 @@ void main() {
     environment.recognizer.emit('What is 25 plus 35?');
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
+    await tester.pump(const Duration(milliseconds: 300));
     await expectLater(
       find.byType(MaterialApp),
       matchesGoldenFile('goldens/03_voice.png'),
