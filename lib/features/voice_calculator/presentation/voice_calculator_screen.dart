@@ -90,7 +90,14 @@ class _VoiceCalculatorScreenState extends ConsumerState<VoiceCalculatorScreen>
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Row(
                 children: [
-                  Text(settings.language.flag),
+                  Text(
+                    settings.language.code.toUpperCase(),
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                      color: theme.colorScheme.primary,
+                    ),
+                  ),
                   const SizedBox(width: 6),
                   Text(
                     settings.effectiveSpeechLanguage.nativeName,

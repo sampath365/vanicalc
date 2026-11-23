@@ -76,8 +76,6 @@ class HomeScreen extends ConsumerWidget {
         .length;
     final favoriteCount = history.where((record) => record.favorite).length;
     final recent = history.take(3).toList(growable: false);
-    final width = MediaQuery.sizeOf(context).width;
-    final columns = width >= 900 ? 4 : (width >= 640 ? 3 : 2);
 
     return Scaffold(
       body: SafeArea(
@@ -184,11 +182,11 @@ class HomeScreen extends ConsumerWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: _features.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: columns,
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 240,
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 12,
-                childAspectRatio: width >= 640 ? 1.5 : 1.28,
+                childAspectRatio: 1.05,
               ),
               itemBuilder: (context, index) {
                 final feature = _features[index];
@@ -355,7 +353,14 @@ class _LanguageChip extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(settings.language.flag, style: const TextStyle(fontSize: 14)),
+            Text(
+              settings.language.code.toUpperCase(),
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w800,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
             const SizedBox(width: 6),
             ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 90),

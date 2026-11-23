@@ -257,12 +257,27 @@ Widget wrapForTest(
   required List<Override> overrides,
   AppLanguage language = AppLanguage.english,
   AppThemeMode themeMode = AppThemeMode.light,
+  bool useRobotoFont = false,
 }) {
+  ThemeData withFont(ThemeData theme) {
+    if (!useRobotoFont) return theme;
+    return theme.copyWith(
+      textTheme: theme.textTheme.apply(fontFamily: 'Roboto'),
+      primaryTextTheme: theme.primaryTextTheme.apply(fontFamily: 'Roboto'),
+      appBarTheme: theme.appBarTheme.copyWith(
+        titleTextStyle: theme.appBarTheme.titleTextStyle?.copyWith(
+          fontFamily: 'Roboto',
+        ),
+      ),
+    );
+  }
+
   return ProviderScope(
     overrides: overrides,
     child: MaterialApp(
-      theme: AppTheme.light(AccentPalette.orange),
-      darkTheme: AppTheme.dark(AccentPalette.orange),
+      debugShowCheckedModeBanner: false,
+      theme: withFont(AppTheme.light(AccentPalette.orange)),
+      darkTheme: withFont(AppTheme.dark(AccentPalette.orange)),
       themeMode: themeMode.themeMode,
       locale: language.locale,
       supportedLocales: AppLocalizations.supportedLocales,

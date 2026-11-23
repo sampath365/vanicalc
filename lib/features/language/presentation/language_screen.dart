@@ -126,7 +126,14 @@ class _LanguageTile extends StatelessWidget {
               color: theme.colorScheme.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(14),
             ),
-            child: Text(language.flag, style: const TextStyle(fontSize: 20)),
+            child: Text(
+              language.code.toUpperCase(),
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w800,
+                color: theme.colorScheme.primary,
+              ),
+            ),
           ),
           const SizedBox(width: 14),
           Expanded(

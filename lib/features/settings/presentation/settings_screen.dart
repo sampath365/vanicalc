@@ -517,7 +517,7 @@ class _LanguageDropdown extends StatelessWidget {
                   value: language,
                   label: language.nativeName,
                   subtitle: language.englishName,
-                  leading: language.flag,
+                  leading: language.code.toUpperCase(),
                 ),
             ],
             onChanged: onChanged,

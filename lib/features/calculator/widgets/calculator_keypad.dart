@@ -211,23 +211,25 @@ class CalcKeyButton extends StatelessWidget {
           ),
         ],
       ),
-      child: Text(
-        spec.display,
-        style: TextStyle(
-          fontSize: fontSize,
-          fontWeight: spec.type == CalcKeyType.number
-              ? FontWeight.w600
-              : FontWeight.w700,
-          color: foreground,
-          letterSpacing: -0.2,
-        ),
-      ),
+      child: spec.value == 'back'
+          ? Icon(Icons.backspace_outlined, size: 22, color: foreground)
+          : Text(
+              spec.display,
+              style: TextStyle(
+                fontSize: fontSize,
+                fontWeight: spec.type == CalcKeyType.number
+                    ? FontWeight.w600
+                    : FontWeight.w700,
+                color: foreground,
+                letterSpacing: -0.2,
+              ),
+            ),
     );
 
     return Semantics(
       key: ValueKey('calc_key_${spec.value}'),
       button: true,
-      label: spec.display,
+      label: spec.value == 'back' ? 'Backspace' : spec.display,
       child: PressableScale(onTap: onTap, scale: 0.92, child: content),
     );
   }

@@ -59,55 +59,98 @@ class AppTheme {
         ? AppColors.darkSurfaceAlt
         : AppColors.lightSurfaceAlt;
 
+    final typography = Typography.material2021(platform: TargetPlatform.android)
+        .black;
+    TextStyle style(
+      TextStyle? base, {
+      double? fontSize,
+      FontWeight? fontWeight,
+      double? letterSpacing,
+      double? height,
+      Color? color,
+    }) {
+      return (base ?? const TextStyle()).copyWith(
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        letterSpacing: letterSpacing,
+        height: height,
+        color: color,
+      );
+    }
+
     final baseText = TextTheme(
-      displayLarge: TextStyle(
+      displayLarge: style(
+        typography.displayLarge,
         fontSize: 46,
         fontWeight: FontWeight.w700,
         letterSpacing: -1.2,
         color: textColor,
       ),
-      displayMedium: TextStyle(
+      displayMedium: style(
+        typography.displayMedium,
         fontSize: 38,
         fontWeight: FontWeight.w700,
         letterSpacing: -0.8,
         color: textColor,
       ),
-      headlineLarge: TextStyle(
+      headlineLarge: style(
+        typography.headlineLarge,
         fontSize: 30,
         fontWeight: FontWeight.w700,
         letterSpacing: -0.6,
         color: textColor,
       ),
-      headlineMedium: TextStyle(
+      headlineMedium: style(
+        typography.headlineMedium,
         fontSize: 24,
         fontWeight: FontWeight.w700,
         letterSpacing: -0.4,
         color: textColor,
       ),
-      titleLarge: TextStyle(
+      titleLarge: style(
+        typography.titleLarge,
         fontSize: 20,
         fontWeight: FontWeight.w700,
         color: textColor,
       ),
-      titleMedium: TextStyle(
+      titleMedium: style(
+        typography.titleMedium,
         fontSize: 16,
         fontWeight: FontWeight.w600,
         color: textColor,
       ),
-      titleSmall: TextStyle(
+      titleSmall: style(
+        typography.titleSmall,
         fontSize: 14,
         fontWeight: FontWeight.w600,
         color: textColor,
       ),
-      bodyLarge: TextStyle(fontSize: 16, height: 1.45, color: textColor),
-      bodyMedium: TextStyle(fontSize: 14, height: 1.45, color: textColor),
-      bodySmall: TextStyle(fontSize: 12.5, height: 1.4, color: muted),
-      labelLarge: TextStyle(
+      bodyLarge: style(
+        typography.bodyLarge,
+        fontSize: 16,
+        height: 1.45,
+        color: textColor,
+      ),
+      bodyMedium: style(
+        typography.bodyMedium,
+        fontSize: 14,
+        height: 1.45,
+        color: textColor,
+      ),
+      bodySmall: style(
+        typography.bodySmall,
+        fontSize: 12.5,
+        height: 1.4,
+        color: muted,
+      ),
+      labelLarge: style(
+        typography.labelLarge,
         fontSize: 15,
         fontWeight: FontWeight.w600,
         color: textColor,
       ),
-      labelMedium: TextStyle(
+      labelMedium: style(
+        typography.labelMedium,
         fontSize: 12.5,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.2,
@@ -250,7 +293,11 @@ class AppTheme {
       chipTheme: ChipThemeData(
         backgroundColor: surfaceAlt,
         side: BorderSide(color: border),
-        labelStyle: TextStyle(color: textColor, fontSize: 13),
+        labelStyle: baseText.labelLarge?.copyWith(
+          color: textColor,
+          fontSize: 13,
+          fontWeight: FontWeight.w500,
+        ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       sliderTheme: SliderThemeData(

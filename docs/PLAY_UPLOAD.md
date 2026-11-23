@@ -49,8 +49,11 @@ live number words under the calculator, speak-on-equals, and a 19-category unit 
 - Short description, full description: copy from `docs/STORE_LISTING.md`.
 - App icon: 512×512 PNG (export from `assets/icon/app_icon.png`).
 - Feature graphic: `docs/store/feature-graphic.png` (1024×500).
-- Phone screenshots: at least 4 (1080×1920 or larger). Capture:
-  dashboard, standard calculator, voice calculator, number-to-words, GST, scan & count.
+- Phone screenshots: use `docs/store/screenshots/phone_01…10` (10 images, 1170×2532).
+- 7-inch tablet: `docs/store/screenshots/tablet7_01…02`.
+- 10-inch tablet: `docs/store/screenshots/tablet10_01…02`.
+- App icon: `docs/store/app-icon-512.png`.
+- Feature graphic: `docs/store/feature-graphic.png`.
 
 **Policy → App content**
 

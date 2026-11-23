@@ -4,8 +4,8 @@ Built on 22 November 2026 with Flutter 3.50.1 / Dart 3.14.0 and Android SDK 36.
 
 | Artifact | Path | Size | SHA-256 |
 | --- | --- | --- | --- |
-| Play upload bundle | `build/app/outputs/bundle/release/app-release.aab` | 68.1 MB | `5ce6b4daa7f808a08586c71711cba86e7943c56072e4d1c50a5548ed3b67f3c0` |
-| Universal release APK | `build/app/outputs/flutter-apk/app-release.apk` | 77.9 MB | `6b662ea621c7d302ed2fda3928b6871ae2618b7967a94a6d946a77725f2175ae` |
+| Play upload bundle | `build/app/outputs/bundle/release/app-release.aab` | 68.1 MB | `8b84bc2e5d28da46ac33d232d48a87e706b96bb4e4621dfb47413b79bed4e891` |
+| Universal release APK | `build/app/outputs/flutter-apk/app-release.apk` | 77.9 MB | `5c4e308388ddb8d23281669e0e3b230c413a69dcc7679c43243b40dba9af65bc` |
 
 The artifacts live under `build/`, which is gitignored. Rebuild them with:
 
