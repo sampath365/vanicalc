@@ -2,18 +2,20 @@
 
 ## Identity
 
-- **App name:** VaniCalc — Smart Voice Calculator
+- **App name:** VaniCalc: Voice Calculator
 - **Package:** `com.egan.vanicalc`
 - **Category:** Tools
 - **Tags:** calculator, voice calculator, number to words, GST calculator, unit converter
 - **Default language:** English (India)
 - **Privacy policy URL:** https://github.com/sampath365/vanicalc/blob/main/docs/PRIVACY_POLICY.md
 
-## Short description (max 80 characters)
+## Short description (73/80)
 
 ```
-Speak, scan or type. 10 Indian languages, offline words, GST tools.
+Voice calculator in 10 Indian languages, offline words, GST & converters.
 ```
+
+Full copy-paste text for all three fields: [`STORE_DESCRIPTIONS.md`](STORE_DESCRIPTIONS.md).
 
 ## Full description
 
