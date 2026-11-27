@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// Clipboard, sharing and haptic helpers with a thin testable surface.
 class PlatformServices {
@@ -18,4 +19,8 @@ class PlatformServices {
   Future<void> mediumHaptic() => HapticFeedback.mediumImpact();
 
   Future<void> successHaptic() => HapticFeedback.selectionClick();
+
+  Future<bool> openUrl(String url) async {
+    return launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+  }
 }

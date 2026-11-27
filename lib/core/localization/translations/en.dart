@@ -403,4 +403,5 @@ const Map<String, String> enStrings = <String, String>{
   'scan_save': 'Save total',
   'scan_items_word': 'items',
   'scan_total_words': 'Total in words',
+  'privacy_view_full': 'View full policy',
 };

@@ -2,7 +2,7 @@
 
 **File to upload:** `deploy/VaniCalc-1.1.0-release.aab`
 **Package:** `com.egan.vanicalc` · **Version:** 1.1.0 (code 2)
-**SHA-256:** `b3e4d911a1f48314fcef21345f697fd99e4457a84ade655d88914d1e5bc9b005`
+**SHA-256:** `865064a1c6bd8d288b34f36bcda7c1a7de74606922b638c8a64a829f72ef5e2e`
 
 Download:
 - https://github.com/sampath365/vanicalc/raw/main/deploy/VaniCalc-1.1.0-release.aab
@@ -12,8 +12,19 @@ Verify before uploading:
 
 ```bash
 sha256sum VaniCalc-1.1.0-release.aab
-# must print b3e4d911...c9b005
+# must print 865064a1...ef5e2e
 ```
+
+## Privacy policy (required by Play)
+
+Use this public URL in **Policy → App content → Privacy policy**:
+
+```
+https://github.com/sampath365/vanicalc/blob/main/docs/PRIVACY_POLICY.md
+```
+
+A styled standalone page is also available at `docs/privacy.html` if you host it on your own
+domain later.
 
 ## 1. Create the app (one time)
 

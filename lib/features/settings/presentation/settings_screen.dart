@@ -216,7 +216,7 @@ class SettingsScreen extends ConsumerWidget {
                 _NavRow(
                   title: context.tr('settings_privacy'),
                   icon: Icons.privacy_tip_outlined,
-                  onTap: () => _showPrivacy(context),
+                  onTap: () => _showPrivacy(context, ref),
                 ),
                 const Divider(height: 24),
                 _NavRow(
@@ -280,10 +280,10 @@ class SettingsScreen extends ConsumerWidget {
     }
   }
 
-  void _showPrivacy(BuildContext context) {
+  void _showPrivacy(BuildContext context, WidgetRef ref) {
     showDialog<void>(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: Text(context.tr('settings_privacy')),
         content: const SingleChildScrollView(
           child: Text(
@@ -296,7 +296,15 @@ class SettingsScreen extends ConsumerWidget {
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () async {
+              await ref
+                  .read(platformServicesProvider)
+                  .openUrl(AppInfo.privacyPolicyUrl);
+            },
+            child: Text(context.tr('privacy_view_full')),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(dialogContext).pop(),
             child: Text(context.tr('close')),
           ),
         ],

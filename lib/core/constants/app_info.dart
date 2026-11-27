@@ -10,4 +10,6 @@ class AppInfo {
   static const String packageName = 'com.egan.vanicalc';
   static const String supportEmail = 'support@eganlabs.com';
   static const String website = 'https://github.com/sampath365/vanicalc';
+  static const String privacyPolicyUrl =
+      'https://github.com/sampath365/vanicalc/blob/main/docs/PRIVACY_POLICY.md';
 }
